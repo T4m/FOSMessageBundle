@@ -1,0 +1,39 @@
+{
+    "name": "tgalopin/fos-message-bundle",
+    "type": "library",
+    "description": "[WIP] Provides user-to-user messaging features for your Symfony application.",
+    "keywords": ["fos", "message", "messaging"],
+    "homepage": "https://github.com/tgalopin/FOSMessageBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Titouan Galopin",
+            "email": "galopintitouan@gmail.com",
+            "homepage": "http://titouangalopin.com"
+        },
+        {
+            "name": "Thibault Duplessis",
+            "email": "thibault.duplessis@gmail.com",
+            "homepage": "http://ornicar.github.com"
+        },
+        {
+            "name": "FriendsOfSymfony Community",
+            "homepage": "https://github.com/friendsofsymfony/FOSMessageBundle/contributors"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "symfony/form": "~2.1",
+        "symfony/framework-bundle": "~2.1",
+        "symfony/security": "~2.1",
+        "symfony/twig-bundle": "~2.1",
+        "tgalopin/fos-message": "dev-master"
+    },
+    "suggest": {
+        "doctrine/doctrine-bundle": "dev-master",
+        "doctrine/mongodb-odm-bundle": "dev-master"
+    },
+    "autoload": {
+        "psr-4": { "FOS\\MessageBundle\\": "" }
+    }
+}

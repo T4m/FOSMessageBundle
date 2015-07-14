@@ -1,0 +1,3 @@
+services:
+    fos_message.model_builder:
+        class: FOS\Message\ObjectBuilder\ModelBuilder
