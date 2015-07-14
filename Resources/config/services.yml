@@ -1,3 +1,66 @@
 services:
     fos_message.model_builder:
         class: FOS\Message\ObjectBuilder\ModelBuilder
+        arguments:
+            - %fos_message.message_class%
+            - %fos_message.message_metadata_class%
+            - %fos_message.thread_class%
+            - %fos_message.thread_metadata_class%
+
+    fos_message.delegated_event_dispatcher:
+        class: FOS\Message\EventDispatcher\DelegatedEventDispatcher
+        arguments:
+            - @event_dispatcher
+
+    fos_message.service_builder:
+        class: FOS\Message\ObjectBuilder\ServiceBuilder
+        arguments:
+            - @fos_message.driver
+            - @fos_message.model_builder
+            - @fos_message.delegated_event_dispatcher
+
+    fos_message.composer.default:
+        class: FOS\Message\Composer\Composer
+        factory_service: fos_message.service_builder
+        factory_method: createComposer
+
+    fos_message.deleter.default:
+        class: FOS\Message\Deleter\Deleter
+        factory_service: fos_message.service_builder
+        factory_method: createDeleter
+
+    fos_message.provider.default:
+        class: FOS\Message\Provider\Provider
+        factory_service: fos_message.service_builder
+        factory_method: createProvider
+
+    fos_message.reader.default:
+        class: FOS\Message\Reader\Reader
+        factory_service: fos_message.service_builder
+        factory_method: createReader
+
+    fos_message.remover.default:
+        class: FOS\Message\Remover\Remover
+        factory_service: fos_message.service_builder
+        factory_method: createRemover
+
+    fos_message.sender.default:
+        class: FOS\Message\Sender\Sender
+        factory_service: fos_message.service_builder
+        factory_method: createSender
+
+    fos_message.updater.default:
+        class: FOS\Message\Updater\Updater
+        factory_service: fos_message.service_builder
+        factory_method: createUpdater
+
+    fos_message.repository:
+        class: FOS\Message\Repository
+        arguments:
+            - @fos_message.composer
+            - @fos_message.deleter
+            - @fos_message.provider
+            - @fos_message.reader
+            - @fos_message.sender
+            - @fos_message.updater
+            - @fos_message.remover

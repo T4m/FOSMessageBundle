@@ -23,6 +23,21 @@ class FOSMessageExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+
+        $loader->load(sprintf('%s.yml', $config['driver']));
         $loader->load('services.yml');
+
+        $container->setParameter('fos_message.message_class', $config['models']['message_class']);
+        $container->setParameter('fos_message.message_metadata_class', $config['models']['message_metadata_class']);
+        $container->setParameter('fos_message.thread_class', $config['models']['thread_class']);
+        $container->setParameter('fos_message.thread_metadata_class', $config['models']['thread_metadata_class']);
+
+        $container->setAlias('fos_message.composer', $config['services']['composer']);
+        $container->setAlias('fos_message.deleter', $config['services']['deleter']);
+        $container->setAlias('fos_message.provider', $config['services']['provider']);
+        $container->setAlias('fos_message.reader', $config['services']['reader']);
+        $container->setAlias('fos_message.remover', $config['services']['remover']);
+        $container->setAlias('fos_message.sender', $config['services']['sender']);
+        $container->setAlias('fos_message.updater', $config['services']['updater']);
     }
 }

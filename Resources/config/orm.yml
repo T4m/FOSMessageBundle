@@ -1,0 +1,5 @@
+services:
+    fos_message.driver:
+        class: FOS\Message\Driver\DoctrineORM\DoctrineORMDriver
+        arguments:
+            - @doctrine.orm.entity_manager
