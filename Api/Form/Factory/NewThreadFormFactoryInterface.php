@@ -9,15 +9,21 @@
  * file that was distributed with this source code.
  */
 
-namespace FOS\MessageBundle;
+namespace FOS\MessageBundle\Api\Form\Factory;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Symfony\Component\Form\FormInterface;
 
 /**
- * Main class of the bundle
+ * A new thread form factory is an object able to create new thread forms
  *
  * @author Titouan Galopin <galopintitouan@gmail.com>
  */
-class FOSMessageBundle extends Bundle
+interface NewThreadFormFactoryInterface
 {
+    /**
+     * Creates a new thread form
+     *
+     * @return FormInterface
+     */
+    public function create();
 }

@@ -1,0 +1,17 @@
+services:
+
+    #
+    # Participant provider
+    #
+    fos_message.participant_provider:
+        class: FOS\MessageBundle\Security\ParticipantProvider
+        arguments:
+            - @security.token_storage
+
+    #
+    # Authorize
+    #
+    fos_message.authorizer:
+        class: FOS\MessageBundle\Security\Authorizer
+        arguments:
+            - @fos_message.participant_provider

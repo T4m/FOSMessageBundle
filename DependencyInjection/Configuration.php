@@ -1,14 +1,23 @@
 <?php
 
+/*
+ * This file is part of the fos/message-bundle package.
+ *
+ * (c) FriendsOfSymfony <http://friendsofsymfony.github.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace FOS\MessageBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
- * This is the class that validates and merges configuration from your app/config files
+ * FOSMessageBundle configuration definition
  *
- * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html#cookbook-bundles-extension-config-class}
+ * @author Titouan Galopin <galopintitouan@gmail.com>
  */
 class Configuration implements ConfigurationInterface
 {
@@ -42,6 +51,39 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('remover')->defaultValue('fos_message.remover.default')->cannotBeEmpty()->end()
                         ->scalarNode('sender')->defaultValue('fos_message.sender.default')->cannotBeEmpty()->end()
                         ->scalarNode('updater')->defaultValue('fos_message.updater.default')->cannotBeEmpty()->end()
+                    ->end()
+                ->end()
+                ->arrayNode('fields')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('recipient')->defaultValue('_default_')->cannotBeEmpty()->end()
+                        ->scalarNode('subject')->defaultValue('text')->cannotBeEmpty()->end()
+                        ->scalarNode('content')->defaultValue('textarea')->cannotBeEmpty()->end()
+                    ->end()
+                ->end()
+                ->arrayNode('forms')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->arrayNode('new_thread')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('name')->defaultValue('fos_message_new_thread')->cannotBeEmpty()->end()
+                                ->scalarNode('model')->defaultValue('FOS\MessageBundle\Form\Model\NewThreadModel')->end()
+                                ->scalarNode('type')->defaultValue('fos_message.forms.new_thread.type.default')->cannotBeEmpty()->end()
+                                ->scalarNode('factory')->defaultValue('fos_message.forms.new_thread.factory.default')->cannotBeEmpty()->end()
+                                ->scalarNode('handler')->defaultValue('fos_message.forms.new_thread.handler.default')->cannotBeEmpty()->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('reply')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('name')->defaultValue('fos_message_reply')->cannotBeEmpty()->end()
+                                ->scalarNode('model')->defaultValue('FOS\MessageBundle\Form\Model\ReplyModel')->end()
+                                ->scalarNode('type')->defaultValue('fos_message.forms.reply.type.default')->cannotBeEmpty()->end()
+                                ->scalarNode('factory')->defaultValue('fos_message.forms.reply.factory.default')->cannotBeEmpty()->end()
+                                ->scalarNode('handler')->defaultValue('fos_message.forms.reply.handler.default')->cannotBeEmpty()->end()
+                            ->end()
+                        ->end()
                     ->end()
                 ->end()
             ->end();
