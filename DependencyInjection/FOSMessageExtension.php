@@ -37,15 +37,14 @@ class FOSMessageExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
         $loader->load(sprintf('%s.yml', $config['driver']));
+        $loader->load('config.yml');
         $loader->load('form.yml');
-        $loader->load('security.yml');
-        $loader->load('services.yml');
 
         // If FOSUser is detected, load integration with it
         $this->isFosUserBundleDetected = class_exists('\FOS\UserBundle\FOSUserBundle', true);
 
         if ($this->isFosUserBundleDetected) {
-            $loader->load('fos_user.yml');
+            $loader->load('fosuser.yml');
         }
 
         // Load services

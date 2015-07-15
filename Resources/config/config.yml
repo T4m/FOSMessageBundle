@@ -80,3 +80,32 @@ services:
             - @fos_message.sender
             - @fos_message.updater
             - @fos_message.remover
+
+
+    #
+    # Participant provider
+    #
+    fos_message.participant_provider:
+        class: FOS\MessageBundle\Security\ParticipantProvider
+        arguments:
+            - @security.token_storage
+
+    #
+    # Authorize
+    #
+    fos_message.authorizer:
+        class: FOS\MessageBundle\Security\Authorizer
+        arguments:
+            - @fos_message.participant_provider
+
+    #
+    # Twig extension
+    #
+    fos_message.twig_extension:
+        class: FOS\MessageBundle\Twig\Extension\MessageExtension
+        arguments:
+            - @fos_message.participant_provider
+            - @fos_message.provider
+            - @fos_message.authorizer
+        tags:
+            - { name: twig.extension }
