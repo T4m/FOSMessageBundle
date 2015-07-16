@@ -29,16 +29,23 @@ services:
     # Reply
     #
     fos_message.forms.reply.type.default:
-        class: FOS\MessageBundle\Form\Type\NewThreadFormType
+        class: FOS\MessageBundle\Form\Type\ReplyFormType
         arguments:
             - %fos_message.field_type.recipient%
             - %fos_message.field_type.subject%
             - %fos_message.field_type.content%
 
     fos_message.forms.reply.factory.default:
-        class: FOS\MessageBundle\Form\Factory\NewThreadFormFactory
+        class: FOS\MessageBundle\Form\Factory\ReplyFormFactory
         arguments:
             - @form.factory
-            - @fos_message.forms.new_thread.type
-            - %fos_message.forms.new_thread.name%
-            - %fos_message.forms.new_thread.model%
+            - @fos_message.forms.reply.type
+            - %fos_message.forms.reply.name%
+            - %fos_message.forms.reply.model%
+
+    fos_message.forms.reply.handler.default:
+        class: FOS\MessageBundle\Form\Handler\ReplyFormHandler
+        arguments:
+            - @fos_message.composer
+            - @fos_message.sender
+            - @fos_message.participant_provider

@@ -132,6 +132,7 @@ class FOSMessageExtension extends Extension
 
         $container->setAlias('fos_message.forms.reply.type', $config['forms']['reply']['type']);
         $container->setAlias('fos_message.forms.reply.factory', $config['forms']['reply']['factory']);
+        $container->setAlias('fos_message.forms.reply.handler', $config['forms']['reply']['handler']);
         $container->setParameter('fos_message.forms.reply.name', $config['forms']['reply']['name']);
         $container->setParameter('fos_message.forms.reply.model', $config['forms']['reply']['model']);
     }

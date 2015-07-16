@@ -11,17 +11,20 @@ fos_message_deleted:
     defaults: { _controller: FOSMessageBundle:Message:deleted }
 
 fos_message_thread_new:
-    pattern: /deleted
-    defaults: { _controller: FOSMessageBundle:Message:deleted }
+    pattern: /new
+    defaults: { _controller: FOSMessageBundle:Message:newThread }
 
 fos_message_thread_delete:
-    pattern: /deleted
-    defaults: { _controller: FOSMessageBundle:Message:deleted }
+    pattern: /thread/{threadId}/delete
+    requirements: { threadId: \d+ }
+    defaults: { _controller: FOSMessageBundle:Message:delete }
 
 fos_message_thread_undelete:
-    pattern: /deleted
-    defaults: { _controller: FOSMessageBundle:Message:deleted }
+    pattern: /thread/{threadId}/undelete
+    requirements: { threadId: \d+ }
+    defaults: { _controller: FOSMessageBundle:Message:undelete }
 
 fos_message_thread_view:
-    pattern: /deleted
-    defaults: { _controller: FOSMessageBundle:Message:deleted }
+    pattern: /thread/{threadId}
+    requirements: { threadId: \d+ }
+    defaults: { _controller: FOSMessageBundle:Message:thread }

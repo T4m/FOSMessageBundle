@@ -1,4 +1,4 @@
-<table>
+<table class="table">
 
     <thead>
         <tr>
@@ -12,8 +12,6 @@
     </thead>
 
     <tbody>
-
-    {% if threads %}
         {% for thread in threads %}
             <tr>
                 <td>
@@ -56,20 +54,18 @@
                             {% set submitValue %}{% trans from 'FOSMessageBundle' %}delete{% endtrans %}{% endset %}
                         {% endif %}
                         <form action="{{ formAction }}" method="post">
-                                <input type="submit" value="{{ submitValue }}" />
+                            <input type="submit" value="{{ submitValue }}" />
                         </form>
                     {% endif %}
                 </td>
             </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">
+                    {% trans from 'FOSMessageBundle' %}no_thread{% endtrans %}.
+                </td>
+            </tr>
         {% endfor %}
-    {% else %}
-        <tr>
-            <td colspan="6">
-                {% trans from 'FOSMessageBundle' %}no_thread{% endtrans %}.
-            </td>
-        </tr>
-    {% endif %}
-
     </tbody>
 
 </table>
