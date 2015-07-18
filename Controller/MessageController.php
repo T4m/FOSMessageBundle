@@ -36,12 +36,14 @@ final class MessageController extends Controller
      */
     public function inboxAction(Request $request)
     {
+        $participant = $this->checkAccessAndGetParticipant();
+
         $searchQuery = $request->query->get('q');
 
         if (null !== $searchQuery) {
-            $threads = $this->get('fos_message.searcher')->searchInboxThreads($this->getParticipant(), $searchQuery);
+            $threads = $this->get('fos_message.searcher')->searchInboxThreads($participant, $searchQuery);
         } else {
-            $threads = $this->get('fos_message.provider')->getInboxThreads($this->getParticipant());
+            $threads = $this->get('fos_message.provider')->getInboxThreads($participant);
         }
 
         return $this->renderThemed('inbox.html.twig', [
@@ -59,12 +61,14 @@ final class MessageController extends Controller
      */
     public function sentAction(Request $request)
     {
+        $participant = $this->checkAccessAndGetParticipant();
+
         $searchQuery = $request->query->get('q');
 
         if (null !== $searchQuery) {
-            $threads = $this->get('fos_message.searcher')->searchSentThreads($this->getParticipant(), $searchQuery);
+            $threads = $this->get('fos_message.searcher')->searchSentThreads($participant, $searchQuery);
         } else {
-            $threads = $this->get('fos_message.provider')->getSentThreads($this->getParticipant());
+            $threads = $this->get('fos_message.provider')->getSentThreads($participant);
         }
 
         return $this->renderThemed('sent.html.twig', [
@@ -82,12 +86,14 @@ final class MessageController extends Controller
      */
     public function deletedAction(Request $request)
     {
+        $participant = $this->checkAccessAndGetParticipant();
+
         $searchQuery = $request->query->get('q');
 
         if (null !== $searchQuery) {
-            $threads = $this->get('fos_message.searcher')->searchDeletedThreads($this->getParticipant(), $searchQuery);
+            $threads = $this->get('fos_message.searcher')->searchDeletedThreads($participant, $searchQuery);
         } else {
-            $threads = $this->get('fos_message.provider')->getDeletedThreads($this->getParticipant());
+            $threads = $this->get('fos_message.provider')->getDeletedThreads($participant);
         }
 
         return $this->renderThemed('deleted.html.twig', [
@@ -104,6 +110,8 @@ final class MessageController extends Controller
      */
     public function newAction(Request $request)
     {
+        $this->checkAccessAndGetParticipant();
+
         $form = $this->get('fos_message.forms.new_thread.factory')->create();
         $handler = $this->get('fos_message.forms.new_thread.handler');
 
@@ -128,13 +136,19 @@ final class MessageController extends Controller
      */
     public function threadAction(Request $request, $threadId)
     {
+        $participant = $this->checkAccessAndGetParticipant();
+
         $thread = $this->get('fos_message.provider')->getThread($threadId);
 
         if (! $thread) {
             throw $this->createNotFoundException('Thread not found');
         }
 
-        $this->get('fos_message.reader')->markAsRead($thread, $this->getParticipant());
+        if (! $this->get('fos_message.authorizer')->canSeeThread($thread)) {
+            throw $this->createAccessDeniedException('You are not allowed to see this');
+        }
+
+        $this->get('fos_message.reader')->markAsRead($thread, $participant);
 
         $form = $this->get('fos_message.forms.reply.factory')->create($thread);
         $handler = $this->get('fos_message.forms.reply.handler');
@@ -160,6 +174,8 @@ final class MessageController extends Controller
      */
     public function deleteAction(Request $request, $threadId)
     {
+        $participant = $this->checkAccessAndGetParticipant();
+
         $this->handleActionForm('delete_' . $threadId, $request);
 
         $thread = $this->get('fos_message.provider')->getThread($threadId);
@@ -168,7 +184,11 @@ final class MessageController extends Controller
             throw $this->createNotFoundException('Thread not found');
         }
 
-        $this->get('fos_message.deleter')->markAsDeleted($thread, $this->getParticipant());
+        if (! $this->get('fos_message.authorizer')->canDeleteThread($thread)) {
+            throw $this->createAccessDeniedException('You are not allowed to do this');
+        }
+
+        $this->get('fos_message.deleter')->markAsDeleted($thread, $participant);
 
         return $this->redirect($this->generateUrl('fos_message_inbox'));
     }
@@ -182,6 +202,8 @@ final class MessageController extends Controller
      */
     public function undeleteAction(Request $request, $threadId)
     {
+        $participant = $this->checkAccessAndGetParticipant();
+
         $this->handleActionForm('undelete_' . $threadId, $request);
 
         $thread = $this->get('fos_message.provider')->getThread($threadId);
@@ -190,7 +212,11 @@ final class MessageController extends Controller
             throw $this->createNotFoundException('Thread not found');
         }
 
-        $this->get('fos_message.deleter')->markAsUndeleted($thread, $this->getParticipant());
+        if (! $this->get('fos_message.authorizer')->canDeleteThread($thread)) {
+            throw $this->createAccessDeniedException('You are not allowed to do this');
+        }
+
+        $this->get('fos_message.deleter')->markAsUndeleted($thread, $participant);
 
         return $this->redirect($this->generateUrl('fos_message_deleted'));
     }
@@ -205,6 +231,8 @@ final class MessageController extends Controller
      */
     public function readAction(Request $request, $threadId)
     {
+        $participant = $this->checkAccessAndGetParticipant();
+
         $this->handleActionForm('read_' . $threadId, $request);
 
         $thread = $this->get('fos_message.provider')->getThread($threadId);
@@ -213,7 +241,11 @@ final class MessageController extends Controller
             throw $this->createNotFoundException('Thread not found');
         }
 
-        $this->get('fos_message.reader')->markAsRead($thread, $this->getParticipant());
+        if (! $this->get('fos_message.authorizer')->canSeeThread($thread)) {
+            throw $this->createAccessDeniedException('You are not allowed to do this');
+        }
+
+        $this->get('fos_message.reader')->markAsRead($thread, $participant);
 
         return $this->redirect($this->generateUrl('fos_message_inbox'));
     }
@@ -227,6 +259,8 @@ final class MessageController extends Controller
      */
     public function unreadAction(Request $request, $threadId)
     {
+        $participant = $this->checkAccessAndGetParticipant();
+
         $this->handleActionForm('unread_' . $threadId, $request);
 
         $thread = $this->get('fos_message.provider')->getThread($threadId);
@@ -235,7 +269,11 @@ final class MessageController extends Controller
             throw $this->createNotFoundException('Thread not found');
         }
 
-        $this->get('fos_message.reader')->markAsUnread($thread, $this->getParticipant());
+        if (! $this->get('fos_message.authorizer')->canSeeThread($thread)) {
+            throw $this->createAccessDeniedException('You are not allowed to do this');
+        }
+
+        $this->get('fos_message.reader')->markAsUnread($thread, $participant);
 
         return $this->redirect($this->generateUrl('fos_message_inbox'));
     }
@@ -286,8 +324,16 @@ final class MessageController extends Controller
      *
      * @return ParticipantInterface
      */
-    private function getParticipant()
+    private function checkAccessAndGetParticipant()
     {
-        return $this->get('fos_message.participant_provider')->getAuthenticatedParticipant();
+        $participant = $this->get('fos_message.participant_provider')->getAuthenticatedParticipant();
+
+        if (! $participant instanceof ParticipantInterface) {
+            throw $this->createAccessDeniedException(
+                'You have to be authenticated as a ParticipantInterface to access this page'
+            );
+        }
+
+        return $participant;
     }
 }
