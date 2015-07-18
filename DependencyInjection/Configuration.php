@@ -31,8 +31,8 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->scalarNode('driver')->cannotBeOverwritten()->isRequired()->cannotBeEmpty()->end()
-                ->scalarNode('theme')->defaultValue('default')->cannotBeEmpty()->end()
+                ->enumNode('driver')->values([ 'orm', 'odm' ])->cannotBeOverwritten()->isRequired()->end()
+                ->enumNode('theme')->values([ 'default', 'bootstrap3' ])->defaultValue('default')->end()
                 ->variableNode('extensions')->defaultValue([])->end()
                 ->arrayNode('models')
                     ->isRequired()

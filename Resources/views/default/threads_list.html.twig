@@ -53,7 +53,7 @@
                         </a>
                         {{ 'list.data.on'|trans({'%date%': thread.messages.last.createdAt|date}, 'FOSMessageBundle') }}
                         <br />
-                        {{ 'list.data.by'|trans({'%date%': thread.messages.last.author|e}, 'FOSMessageBundle') }}
+                        {{ 'list.data.by'|trans({'%sender%': thread.messages.last.author|e}, 'FOSMessageBundle') }}
                     {% else %}
                         ----
                     {% endif %}
@@ -63,11 +63,11 @@
                         {% if fos_message_is_deleted(thread) %}
                             {% set delete_form = fos_message_create_action_form('undelete_' ~ thread.id) %}
                             {% set delete_form_action = url('fos_message_thread_undelete', {'threadId': thread.id}) %}
-                            {% set delete_form_button = 'undelete'|trans({}, 'FOSMessageBundle') %}
+                            {% set delete_form_button = 'actions.undelete'|trans({}, 'FOSMessageBundle') %}
                         {% else %}
                             {% set delete_form = fos_message_create_action_form('delete_' ~ thread.id) %}
                             {% set delete_form_action = url('fos_message_thread_delete', {'threadId': thread.id}) %}
-                            {% set delete_form_button = 'delete'|trans({}, 'FOSMessageBundle') %}
+                            {% set delete_form_button = 'actions.delete'|trans({}, 'FOSMessageBundle') %}
                         {% endif %}
 
                         <form method="post" action="{{ delete_form_action }}">
@@ -80,11 +80,11 @@
                         {% if fos_message_is_read(thread) %}
                             {% set read_form = fos_message_create_action_form('unread_' ~ thread.id) %}
                             {% set read_form_action = url('fos_message_thread_unread', {'threadId': thread.id}) %}
-                            {% set read_form_button = 'unread'|trans({}, 'FOSMessageBundle') %}
+                            {% set read_form_button = 'actions.unread'|trans({}, 'FOSMessageBundle') %}
                         {% else %}
                             {% set read_form = fos_message_create_action_form('read_' ~ thread.id) %}
                             {% set read_form_action = url('fos_message_thread_read', {'threadId': thread.id}) %}
-                            {% set read_form_button = 'read'|trans({}, 'FOSMessageBundle') %}
+                            {% set read_form_button = 'actions.read'|trans({}, 'FOSMessageBundle') %}
                         {% endif %}
 
                         <form method="post" action="{{ read_form_action }}">

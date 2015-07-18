@@ -11,7 +11,8 @@
 
 namespace FOS\MessageBundle\DependencyInjection;
 
-use RuntimeException;
+use InvalidArgumentException;
+
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
@@ -36,11 +37,23 @@ class FOSMessageExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
+        if ($config['driver'] === 'odm') {
+            throw new InvalidArgumentException(
+                'Doctrine ODM is not supported by FOSMessageBundle for the moment. ' .
+                'Don\'t hesitate to contribute to its implementation!'
+            );
+        }
+
+        // Driver
         $loader->load(sprintf('%s.yml', $config['driver']));
+
+        // Services
         $loader->load('config.yml');
+
+        // Forms
         $loader->load('form.yml');
 
-        // If FOSUser is detected, load integration with it
+        // If FOSUser is detected, load its integration
         $this->isFosUserBundleDetected = class_exists('\FOS\UserBundle\FOSUserBundle', true);
 
         if ($this->isFosUserBundleDetected) {
@@ -92,6 +105,8 @@ class FOSMessageExtension extends Extension
      *
      * @param array $config
      * @param ContainerBuilder $container
+     *
+     * @throws InvalidArgumentException
      */
     private function loadServices(array $config, ContainerBuilder $container)
     {
@@ -111,13 +126,15 @@ class FOSMessageExtension extends Extension
      *
      * @param array $config
      * @param ContainerBuilder $container
+     *
+     * @throws InvalidArgumentException
      */
     private function loadForms(array $config, ContainerBuilder $container)
     {
         if ('_default_' === $config['fields']['recipient']) {
             if (! $this->isFosUserBundleDetected) {
-                throw new RuntimeException(
-                    'FOSUserBundle is not detected so you have  to customize the recipient field type'
+                throw new InvalidArgumentException(
+                    'FOSUserBundle is not detected so you have to implement your own recipient field type'
                 );
             }
 
