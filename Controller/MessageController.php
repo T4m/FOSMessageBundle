@@ -254,9 +254,11 @@ final class MessageController extends Controller
      */
     private function renderThemed($view, array $parameters = array(), Response $response = null)
     {
-        $theme = 'default';
-
-        return $this->render(sprintf('FOSMessageBundle:%s:%s', $theme, $view), $parameters, $response);
+        return $this->render(
+            sprintf('FOSMessageBundle:%s:%s', $this->getParameter('fos_message.theme'), $view),
+            $parameters,
+            $response
+        );
     }
 
     /**

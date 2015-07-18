@@ -51,6 +51,9 @@ class FOSMessageExtension extends Extension
         $this->loadModels($config, $container);
         $this->loadServices($config, $container);
         $this->loadForms($config, $container);
+
+        // Theme
+        $container->setParameter('fos_message.theme', $config['theme']);
     }
 
 

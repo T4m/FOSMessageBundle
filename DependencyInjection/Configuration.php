@@ -32,6 +32,8 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('driver')->cannotBeOverwritten()->isRequired()->cannotBeEmpty()->end()
+                ->scalarNode('theme')->defaultValue('default')->cannotBeEmpty()->end()
+                ->variableNode('extensions')->defaultValue([])->end()
                 ->arrayNode('models')
                     ->isRequired()
                     ->children()
