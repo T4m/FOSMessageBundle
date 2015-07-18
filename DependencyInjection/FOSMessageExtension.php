@@ -17,7 +17,6 @@ use InvalidArgumentException;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
@@ -59,6 +58,7 @@ class FOSMessageExtension extends Extension
 
         // Enable bridges
         $bridgesManager = $container->get('fos_message.bridges_manager');
+        $bridgesManager->registerAvailableBridge();
 
         foreach ($config['bridges'] as $bridge) {
             $bridgesManager->enable($bridge);
@@ -77,30 +77,6 @@ class FOSMessageExtension extends Extension
     }
 
 
-    /**
-     * @param Loader\YamlFileLoader $loader
-     * @param BridgeManager $manager
-     * @param ContainerBuilder $container
-     *
-     * @throws RuntimeException
-     */
-    private function loadBridges(Loader\YamlFileLoader $loader, BridgeManager $manager, ContainerBuilder $container)
-    {
-        /*
-         * FOSUserBundle
-         */
-        if ($manager->isEnabled('fos_user')) {
-            $loader->load('bridges/fos_user.yml');
-
-            if ('_default_' === $container->getParameter('fos_message.field_type.recipient')) {
-                $container->setParameter('fos_message.field_type.recipient', 'fos_user_recipient');
-            }
-        } else {
-            throw new RuntimeException(
-                'You have to implement your own recipient field type (or use the FOSUserBundle bridge)'
-            );
-        }
-    }
 
     /**
      * Set models parameters in container for ModelBuilder
@@ -178,5 +154,37 @@ class FOSMessageExtension extends Extension
         $container->setAlias('fos_message.forms.reply.handler', $config['forms']['reply']['handler']);
         $container->setParameter('fos_message.forms.reply.name', $config['forms']['reply']['name']);
         $container->setParameter('fos_message.forms.reply.model', $config['forms']['reply']['model']);
+    }
+
+    /**
+     * @param Loader\YamlFileLoader $loader
+     * @param BridgeManager $manager
+     * @param ContainerBuilder $container
+     *
+     * @throws RuntimeException
+     */
+    private function loadBridges(Loader\YamlFileLoader $loader, BridgeManager $manager, ContainerBuilder $container)
+    {
+        /*
+         * FOSUserBundle
+         */
+        if ($manager->isEnabled('fos_user')) {
+            $loader->load('bridges/fos_user.yml');
+
+            if ('_default_' === $container->getParameter('fos_message.field_type.recipient')) {
+                $container->setParameter('fos_message.field_type.recipient', 'fos_user_recipient');
+            }
+        } else {
+            throw new RuntimeException(
+                'You have to implement your own recipient field type (or use the FOSUserBundle bridge)'
+            );
+        }
+
+        /*
+         * KnpPaginatorBundle
+         */
+        if ($manager->isEnabled('knp_paginator')) {
+            $loader->load('bridges/knp_paginator.yml');
+        }
     }
 }

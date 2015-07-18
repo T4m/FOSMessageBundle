@@ -9,22 +9,22 @@
  * file that was distributed with this source code.
  */
 
-namespace FOS\MessageBundle\Bridge\FOSUser;
+namespace FOS\MessageBundle\Bridge\KnpPaginator;
 
 use FOS\MessageBundle\Api\Bridge\BridgeInterface;
 
 /**
- * Bridge definition for FOSUserBundle.
+ * Bridge definition for KnpPaginatorBundle.
  *
  * @author Titouan Galopin <galopintitouan@gmail.com>
  */
-class FOSUserBridge implements BridgeInterface
+class KnpPaginatorBridge implements BridgeInterface
 {
     /**
      * @inheritdoc
      */
     public static function canBeEnabled()
     {
-        return class_exists('\FOS\UserBundle\FOSUserBundle', true);
+        return class_exists('\Knp\Bundle\PaginatorBundle\KnpPaginatorBundle', true);
     }
 }

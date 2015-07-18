@@ -27,6 +27,7 @@ class BridgeManager
      */
     private static $bridges = [
         'fos_user' => 'FOS\MessageBundle\Bridge\FOSUser\FOSUserBridge',
+        'knp_paginator' => 'FOS\MessageBundle\Bridge\KnpPaginator\KnpPaginatorBridge',
     ];
 
     /**
@@ -43,7 +44,13 @@ class BridgeManager
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
+    }
 
+    /**
+     * Register the available bridges in the container
+     */
+    public function registerAvailableBridge()
+    {
         foreach (self::$bridges as $alias => $class) {
             $this->container->setParameter('fos_message.bridges.classes.' . $alias, $class);
             $this->container->setParameter('fos_message.bridges.states.' . $alias, false);

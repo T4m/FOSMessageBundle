@@ -11,7 +11,10 @@
 
 namespace FOS\MessageBundle\Controller;
 
+use FOS\Message\Api\Driver\DriverStatementInterface;
 use FOS\Message\Api\Model\ParticipantInterface;
+use FOS\MessageBundle\Api\Event\PageListEvent;
+use FOS\MessageBundle\Events;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -46,6 +49,12 @@ final class MessageController extends Controller
             $threads = $this->get('fos_message.provider')->getInboxThreads($participant);
         }
 
+        $threads = $this->dispatchPageListEvent($threads, Events::PAGE_INBOX);
+
+        if ($this->get('fos_message.bridges_manager')->isEnabled('knp_paginator')) {
+            $threads = $this->get('fos_message.statement_paginator')->paginate($threads, $request);
+        }
+
         return $this->renderThemed('inbox.html.twig', [
             'searchQuery' => $searchQuery,
             'threads' => $threads,
@@ -71,6 +80,12 @@ final class MessageController extends Controller
             $threads = $this->get('fos_message.provider')->getSentThreads($participant);
         }
 
+        $threads = $this->dispatchPageListEvent($threads, Events::PAGE_SENT);
+
+        if ($this->get('fos_message.bridges_manager')->isEnabled('knp_paginator')) {
+            $threads = $this->get('fos_message.statement_paginator')->paginate($threads, $request);
+        }
+
         return $this->renderThemed('sent.html.twig', [
             'searchQuery' => $searchQuery,
             'threads' => $threads,
@@ -94,6 +109,12 @@ final class MessageController extends Controller
             $threads = $this->get('fos_message.searcher')->searchDeletedThreads($participant, $searchQuery);
         } else {
             $threads = $this->get('fos_message.provider')->getDeletedThreads($participant);
+        }
+
+        $threads = $this->dispatchPageListEvent($threads, Events::PAGE_DELETED);
+
+        if ($this->get('fos_message.bridges_manager')->isEnabled('knp_paginator')) {
+            $threads = $this->get('fos_message.statement_paginator')->paginate($threads, $request);
         }
 
         return $this->renderThemed('deleted.html.twig', [
@@ -335,5 +356,22 @@ final class MessageController extends Controller
         }
 
         return $participant;
+    }
+
+    /**
+     * Dispatch a PageListEvent
+     *
+     * @param DriverStatementInterface $statement
+     * @param string $eventName
+     *
+     * @return DriverStatementInterface
+     */
+    private function dispatchPageListEvent(DriverStatementInterface $statement, $eventName)
+    {
+        $event = new PageListEvent($statement);
+
+        $this->get('event_dispatcher')->dispatch($eventName, $event);
+
+        return $event->getStatement();
     }
 }
