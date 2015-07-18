@@ -1,0 +1,26 @@
+{% extends 'FOSMessageBundle:default:layout.html.twig' %}
+
+{% block fos_message_page %}
+    <h4>
+        {{ 'boxes.inbox'|trans({}, 'FOSMessageBundle') }}
+    </h4>
+
+    <a href="{{ url('fos_message_thread_new' )}}">
+        {{ 'actions.new'|trans({}, 'FOSMessageBundle') }}
+    </a>
+
+    <form method="get">
+        <input type="text" name="q" value="{{ searchQuery ? searchQuery : '' }}"
+               placeholder="{{ 'search.placeholder'|trans({}, 'FOSMessageBundle') }}" />
+    </form>
+
+    <hr />
+
+    <p>
+        {{ 'search.results_found'|transchoice(threads|length, {'%num%': threads|length }, 'FOSMessageBundle') }}
+    </p>
+
+    <hr />
+
+    {% include 'FOSMessageBundle:default:threads_list.html.twig' with {'context': 'inbox', 'threads': threads} %}
+{% endblock %}

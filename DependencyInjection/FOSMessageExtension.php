@@ -97,6 +97,7 @@ class FOSMessageExtension extends Extension
         $container->setAlias('fos_message.provider', $config['services']['provider']);
         $container->setAlias('fos_message.reader', $config['services']['reader']);
         $container->setAlias('fos_message.remover', $config['services']['remover']);
+        $container->setAlias('fos_message.searcher', $config['services']['searcher']);
         $container->setAlias('fos_message.sender', $config['services']['sender']);
         $container->setAlias('fos_message.updater', $config['services']['updater']);
     }

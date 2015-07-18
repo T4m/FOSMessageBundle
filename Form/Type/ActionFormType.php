@@ -11,16 +11,17 @@
 
 namespace FOS\MessageBundle\Form\Type;
 
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Message form type for replying to a conversation
+ * Action form type: contains no specific field, just used as a
+ * CSRF protection for FOSMessage threads manipulations.
  *
  * @author Titouan Galopin <galopintitouan@gmail.com>
- * @author Thibault Duplessis <thibault.duplessis@gmail.com>
  */
-class ReplyFormType extends AbstractFormType
+class ActionFormType extends AbstractType
 {
     /**
      * Build the form
@@ -30,10 +31,7 @@ class ReplyFormType extends AbstractFormType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('content', $this->contentFieldAlias, [
-            'label' => 'body',
-            'translation_domain' => 'FOSMessageBundle',
-        ]);
+        // Contains no field: just for CSRF protection
     }
 
     /**
@@ -42,7 +40,7 @@ class ReplyFormType extends AbstractFormType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'intention' => 'reply',
+            'intention' => 'action',
         ]);
     }
 
@@ -51,6 +49,6 @@ class ReplyFormType extends AbstractFormType
      */
     public function getName()
     {
-        return 'fos_message_reply';
+        return 'fos_message_action';
     }
 }

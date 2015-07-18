@@ -49,3 +49,9 @@ services:
             - @fos_message.composer
             - @fos_message.sender
             - @fos_message.participant_provider
+
+    #
+    # CSRF protection on threads manipulation
+    #
+    fos_message.forms.action.type:
+        class: FOS\MessageBundle\Form\Type\ActionFormType

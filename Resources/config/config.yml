@@ -57,6 +57,11 @@ services:
         factory_service: fos_message.service_builder
         factory_method: createRemover
 
+    fos_message.searcher.default:
+        class: FOS\Message\Searcher\Searcher
+        factory_service: fos_message.service_builder
+        factory_method: createSearcher
+
     fos_message.sender.default:
         class: FOS\Message\Sender\Sender
         factory_service: fos_message.service_builder
@@ -107,5 +112,7 @@ services:
             - @fos_message.participant_provider
             - @fos_message.provider
             - @fos_message.authorizer
+            - @form.factory
+            - @fos_message.forms.action.type
         tags:
             - { name: twig.extension }

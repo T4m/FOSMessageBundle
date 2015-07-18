@@ -1,0 +1,9 @@
+{% extends 'FOSMessageBundle:bootstrap3:layout.html.twig' %}
+
+{% block fos_message_page %}
+    <h4>{% trans from 'FOSMessageBundle' %}sent{% endtrans %}</h4>
+
+    <hr />
+
+    {% include 'FOSMessageBundle:bootstrap3:threads_list.html.twig' with {'threads': threads} %}
+{% endblock %}

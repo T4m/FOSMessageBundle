@@ -12,7 +12,6 @@
 namespace FOS\MessageBundle\Controller;
 
 use FOS\Message\Api\Model\ParticipantInterface;
-use FOS\Message\Api\Provider\ProviderInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,43 +29,93 @@ final class MessageController extends Controller
 {
     /**
      * Displays the authenticated participant inbox
+     * Can be filtered by a search query
      *
+     * @param Request $request
      * @return Response
      */
-    public function inboxAction()
+    public function inboxAction(Request $request)
     {
-        $threads = $this->getProvider()->getInboxThreads($this->getParticipant());
+        $searchQuery = $request->query->get('q');
 
-        return $this->render('FOSMessageBundle:Message:inbox.html.twig', [
-            'threads' => $threads
+        if (null !== $searchQuery) {
+            $threads = $this->get('fos_message.searcher')->searchInboxThreads($this->getParticipant(), $searchQuery);
+        } else {
+            $threads = $this->get('fos_message.provider')->getInboxThreads($this->getParticipant());
+        }
+
+        return $this->renderThemed('inbox.html.twig', [
+            'searchQuery' => $searchQuery,
+            'threads' => $threads,
         ]);
     }
 
     /**
      * Displays the authenticated participant messages sent
+     * Can be filtered by a search query
      *
+     * @param Request $request
      * @return Response
      */
-    public function sentAction()
+    public function sentAction(Request $request)
     {
-        $threads = $this->getProvider()->getSentThreads($this->getParticipant());
+        $searchQuery = $request->query->get('q');
 
-        return $this->render('FOSMessageBundle:Message:sent.html.twig', [
-            'threads' => $threads
+        if (null !== $searchQuery) {
+            $threads = $this->get('fos_message.searcher')->searchSentThreads($this->getParticipant(), $searchQuery);
+        } else {
+            $threads = $this->get('fos_message.provider')->getSentThreads($this->getParticipant());
+        }
+
+        return $this->renderThemed('sent.html.twig', [
+            'searchQuery' => $searchQuery,
+            'threads' => $threads,
         ]);
     }
 
     /**
      * Displays the authenticated participant deleted threads
+     * Can be filtered by a search query
      *
+     * @param Request $request
      * @return Response
      */
-    public function deletedAction()
+    public function deletedAction(Request $request)
     {
-        $threads = $this->getProvider()->getDeletedThreads($this->getParticipant());
+        $searchQuery = $request->query->get('q');
 
-        return $this->render('FOSMessageBundle:Message:deleted.html.twig', [
-            'threads' => $threads
+        if (null !== $searchQuery) {
+            $threads = $this->get('fos_message.searcher')->searchDeletedThreads($this->getParticipant(), $searchQuery);
+        } else {
+            $threads = $this->get('fos_message.provider')->getDeletedThreads($this->getParticipant());
+        }
+
+        return $this->renderThemed('deleted.html.twig', [
+            'searchQuery' => $searchQuery,
+            'threads' => $threads,
+        ]);
+    }
+
+    /**
+     * Start a thread
+     *
+     * @param Request $request
+     * @return RedirectResponse|Response
+     */
+    public function newAction(Request $request)
+    {
+        $form = $this->get('fos_message.forms.new_thread.factory')->create();
+        $handler = $this->get('fos_message.forms.new_thread.handler');
+
+        if ($message = $handler->process($form, $request)) {
+            return $this->redirect($this->generateUrl('fos_message_thread_view', [
+                'threadId' => $message->getThread()->getId()
+            ]));
+        }
+
+        return $this->renderThemed('start_thread.html.twig', [
+            'form' => $form->createView(),
+            'data' => $form->getData()
         ]);
     }
 
@@ -74,15 +123,15 @@ final class MessageController extends Controller
      * Displays a thread, also allows to reply to it
      *
      * @param Request $request
-     * @param $threadId
+     * @param int $threadId
      * @return RedirectResponse|Response|NotFoundHttpException
      */
     public function threadAction(Request $request, $threadId)
     {
-        $thread = $this->getProvider()->getThread($threadId);
+        $thread = $this->get('fos_message.provider')->getThread($threadId);
 
         if (! $thread) {
-            return $this->createNotFoundException('Thread not found');
+            throw $this->createNotFoundException('Thread not found');
         }
 
         $this->get('fos_message.reader')->markAsRead($thread, $this->getParticipant());
@@ -96,83 +145,139 @@ final class MessageController extends Controller
             ]));
         }
 
-        return $this->render('FOSMessageBundle:Message:thread.html.twig', [
+        return $this->renderThemed('thread.html.twig', [
             'form' => $form->createView(),
             'thread' => $thread
         ]);
     }
 
     /**
-     * Create a new thread
+     * Mark a thread as deleted
      *
      * @param Request $request
-     * @return RedirectResponse|Response
+     * @param int $threadId
+     * @return RedirectResponse
      */
-    public function newThreadAction(Request $request)
+    public function deleteAction(Request $request, $threadId)
     {
-        $form = $this->get('fos_message.forms.new_thread.factory')->create();
-        $handler = $this->get('fos_message.forms.new_thread.handler');
+        $this->handleActionForm('delete_' . $threadId, $request);
 
-        if ($message = $handler->process($form, $request)) {
-            return $this->redirect($this->generateUrl('fos_message_thread_view', [
-                'threadId' => $message->getThread()->getId()
-            ]));
+        $thread = $this->get('fos_message.provider')->getThread($threadId);
+
+        if (! $thread) {
+            throw $this->createNotFoundException('Thread not found');
         }
 
-        return $this->render('FOSMessageBundle:Message:newThread.html.twig', [
-            'form' => $form->createView(),
-            'data' => $form->getData()
-        ]);
+        $this->get('fos_message.deleter')->markAsDeleted($thread, $this->getParticipant());
+
+        return $this->redirect($this->generateUrl('fos_message_inbox'));
     }
 
     /**
-     * Deletes a thread
-     * 
-     * @param string $threadId the thread id
-     * 
-     * @return RedirectResponse
-     */
-    public function deleteAction($threadId)
-    {
-        $thread = $this->getProvider()->getThread($threadId);
-        $this->container->get('fos_message.deleter')->markAsDeleted($thread);
-        $this->container->get('fos_message.thread_manager')->saveThread($thread);
-
-        return new RedirectResponse($this->container->get('router')->generate('fos_message_inbox'));
-    }
-    
-    /**
-     * Undeletes a thread
-     * 
-     * @param string $threadId
-     * 
-     * @return RedirectResponse
-     */
-    public function undeleteAction($threadId)
-    {
-        $thread = $this->getProvider()->getThread($threadId);
-        $this->container->get('fos_message.deleter')->markAsUndeleted($thread);
-        $this->container->get('fos_message.thread_manager')->saveThread($thread);
-
-        return new RedirectResponse($this->container->get('router')->generate('fos_message_inbox'));
-    }
-
-    /**
-     * Searches for messages in the inbox and sentbox
+     * Mark a thread as undeleted
      *
-     * @return Response
+     * @param Request $request
+     * @param int $threadId
+     * @return RedirectResponse
      */
-    public function searchAction()
+    public function undeleteAction(Request $request, $threadId)
     {
-        $query = $this->container->get('fos_message.search_query_factory')->createFromRequest();
-        $threads = $this->container->get('fos_message.search_finder')->find($query);
+        $this->handleActionForm('undelete_' . $threadId, $request);
 
-        return $this->container->get('templating')->renderResponse('FOSMessageBundle:Message:search.html.twig', array(
-            'query' => $query,
-            'threads' => $threads
-        ));
+        $thread = $this->get('fos_message.provider')->getThread($threadId);
+
+        if (! $thread) {
+            throw $this->createNotFoundException('Thread not found');
+        }
+
+        $this->get('fos_message.deleter')->markAsUndeleted($thread, $this->getParticipant());
+
+        return $this->redirect($this->generateUrl('fos_message_deleted'));
     }
 
+
+    /**
+     * Mark a thread as read
+     *
+     * @param Request $request
+     * @param int $threadId
+     * @return RedirectResponse
+     */
+    public function readAction(Request $request, $threadId)
+    {
+        $this->handleActionForm('read_' . $threadId, $request);
+
+        $thread = $this->get('fos_message.provider')->getThread($threadId);
+
+        if (! $thread) {
+            throw $this->createNotFoundException('Thread not found');
+        }
+
+        $this->get('fos_message.reader')->markAsRead($thread, $this->getParticipant());
+
+        return $this->redirect($this->generateUrl('fos_message_inbox'));
+    }
+
+    /**
+     * Mark a thread as read
+     *
+     * @param Request $request
+     * @param int $threadId
+     * @return RedirectResponse
+     */
+    public function unreadAction(Request $request, $threadId)
+    {
+        $this->handleActionForm('unread_' . $threadId, $request);
+
+        $thread = $this->get('fos_message.provider')->getThread($threadId);
+
+        if (! $thread) {
+            throw $this->createNotFoundException('Thread not found');
+        }
+
+        $this->get('fos_message.reader')->markAsUnread($thread, $this->getParticipant());
+
+        return $this->redirect($this->generateUrl('fos_message_inbox'));
+    }
+
+
+
+
+    /**
+     * Renders a view using the configured theme.
+     *
+     * @param string   $view       The view name
+     * @param array    $parameters An array of parameters to pass to the view
+     * @param Response $response   A response instance
+     *
+     * @return Response A Response instance
+     */
+    private function renderThemed($view, array $parameters = array(), Response $response = null)
+    {
+        $theme = 'default';
+
+        return $this->render(sprintf('FOSMessageBundle:%s:%s', $theme, $view), $parameters, $response);
+    }
+
+    /**
+     * Handle an action form and throw an access denied
+     * exception if the form is invalid
+     *
+     * @param string $name
+     * @param Request $request
+     */
+    private function handleActionForm($name, Request $request)
+    {
+        $formFactory = $this->get('form.factory');
+        $actionFormType = $this->get('fos_message.forms.action.type');
+
+        $form = $formFactory->createNamed('fos_message_' . $name, $actionFormType);
+        $form->submit($request);
+
+        if (! $form->isValid()) {
+            throw $this->createAccessDeniedException('Token invalid');
+        }
+    }
 
     /**
      * Gets the current authenticated participant
@@ -182,15 +287,5 @@ final class MessageController extends Controller
     private function getParticipant()
     {
         return $this->get('fos_message.participant_provider')->getAuthenticatedParticipant();
-    }
-
-    /**
-     * Gets the provider service
-     *
-     * @return ProviderInterface
-     */
-    private function getProvider()
-    {
-        return $this->get('fos_message.provider');
     }
 }

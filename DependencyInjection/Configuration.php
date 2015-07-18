@@ -49,6 +49,7 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('provider')->defaultValue('fos_message.provider.default')->cannotBeEmpty()->end()
                         ->scalarNode('reader')->defaultValue('fos_message.reader.default')->cannotBeEmpty()->end()
                         ->scalarNode('remover')->defaultValue('fos_message.remover.default')->cannotBeEmpty()->end()
+                        ->scalarNode('searcher')->defaultValue('fos_message.searcher.default')->cannotBeEmpty()->end()
                         ->scalarNode('sender')->defaultValue('fos_message.sender.default')->cannotBeEmpty()->end()
                         ->scalarNode('updater')->defaultValue('fos_message.updater.default')->cannotBeEmpty()->end()
                     ->end()

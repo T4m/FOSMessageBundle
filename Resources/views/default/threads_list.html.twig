@@ -1,0 +1,105 @@
+<table class="fos_message_threads fos_message_{{ context }}">
+    <thead>
+        <tr>
+            <th class="fos_message_threads_subject">
+                {{ 'list.header.subject'|trans({}, 'FOSMessageBundle') }}
+            </th>
+            <th class="fos_message_threads_starter">
+                {{ 'list.header.starter'|trans({}, 'FOSMessageBundle') }}
+            </th>
+            <th class="fos_message_threads_startdate">
+                {{ 'list.header.startdate'|trans({}, 'FOSMessageBundle') }}
+            </th>
+            <th class="fos_message_threads_messages">
+                {{ 'list.header.messages'|trans({}, 'FOSMessageBundle') }}
+            </th>
+            <th class="fos_message_threads_last_message">
+                {{ 'list.header.last_message'|trans({}, 'FOSMessageBundle') }}
+            </th>
+            <th class="fos_message_threads_actions">
+                {{ 'list.header.actions'|trans({}, 'FOSMessageBundle') }}
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for thread in threads %}
+            {% set thread_is_new = not fos_message_is_read(thread) %}
+
+            <tr{% if thread_is_new %} class="fos_message_threads_new"{% endif %}>
+                <td class="fos_message_threads_subject">
+                    <a href="{{ url('fos_message_thread_view', {'threadId': thread.id}) }}">
+                        {{ thread.subject }}
+                    </a>
+
+                    {% if thread_is_new %}
+                        ({{ 'list.data.is_new'|trans({}, 'FOSMessageBundle') }})
+                    {% endif %}
+                </td>
+                <td class="fos_message_threads_starter">
+                    {{ thread.owner }}
+                </td>
+                <td class="fos_message_threads_startdate">
+                    {{ thread.createdAt|date }}
+                </td>
+                <td class="fos_message_threads_messages">
+                    {{ thread.messages|length }}
+                </td>
+                <td class="fos_message_threads_last_message">
+                    {% if thread.messages.last %}
+                        <a href="{{ url('fos_message_thread_view', {'threadId': thread.id}) }}#message_{{ thread.messages.last.id }}"
+                           title="{{ 'list.data.goto_last'|trans({}, 'FOSMessageBundle') }}">
+                            →
+                        </a>
+                        {{ 'list.data.on'|trans({'%date%': thread.messages.last.createdAt|date}, 'FOSMessageBundle') }}
+                        <br />
+                        {{ 'list.data.by'|trans({'%date%': thread.messages.last.author|e}, 'FOSMessageBundle') }}
+                    {% else %}
+                        ----
+                    {% endif %}
+                </td>
+                <td class="fos_message_threads_actions">
+                    {% if fos_message_can_delete(thread) %}
+                        {% if fos_message_is_deleted(thread) %}
+                            {% set delete_form = fos_message_create_action_form('undelete_' ~ thread.id) %}
+                            {% set delete_form_action = url('fos_message_thread_undelete', {'threadId': thread.id}) %}
+                            {% set delete_form_button = 'undelete'|trans({}, 'FOSMessageBundle') %}
+                        {% else %}
+                            {% set delete_form = fos_message_create_action_form('delete_' ~ thread.id) %}
+                            {% set delete_form_action = url('fos_message_thread_delete', {'threadId': thread.id}) %}
+                            {% set delete_form_button = 'delete'|trans({}, 'FOSMessageBundle') %}
+                        {% endif %}
+
+                        <form method="post" action="{{ delete_form_action }}">
+                            {{ form_rest(delete_form) }}
+                            <button type="submit">{{ delete_form_button }}</button>
+                        </form>
+                    {% endif %}
+
+                    {% if context == 'inbox' %}
+                        {% if fos_message_is_read(thread) %}
+                            {% set read_form = fos_message_create_action_form('unread_' ~ thread.id) %}
+                            {% set read_form_action = url('fos_message_thread_unread', {'threadId': thread.id}) %}
+                            {% set read_form_button = 'unread'|trans({}, 'FOSMessageBundle') %}
+                        {% else %}
+                            {% set read_form = fos_message_create_action_form('read_' ~ thread.id) %}
+                            {% set read_form_action = url('fos_message_thread_read', {'threadId': thread.id}) %}
+                            {% set read_form_button = 'read'|trans({}, 'FOSMessageBundle') %}
+                        {% endif %}
+
+                        <form method="post" action="{{ read_form_action }}">
+                            {{ form_rest(read_form) }}
+                            <button type="submit">{{ read_form_button }}</button>
+                        </form>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">
+                    {{ 'list.data.no_thread'|trans({}, 'FOSMessageBundle') }}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

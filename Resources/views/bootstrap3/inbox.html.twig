@@ -1,0 +1,11 @@
+{% extends 'FOSMessageBundle:bootstrap3:layout.html.twig' %}
+
+{% block fos_message_page %}
+    <h4>{% trans from 'FOSMessageBundle' %}inbox{% endtrans %}</h4>
+
+    <a href="{{ url('fos_message_thread_new' )}}">{% trans from 'FOSMessageBundle' %}send_new{% endtrans %}</a>
+
+    <hr />
+
+    {% include 'FOSMessageBundle:bootstrap3:threads_list.html.twig' with {'threads': threads} %}
+{% endblock %}

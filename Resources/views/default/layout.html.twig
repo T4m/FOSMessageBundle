@@ -1,0 +1,25 @@
+{% extends 'FOSMessageBundle::layout.html.twig' %}
+
+{% block fos_message_content %}
+    <h1>{{ 'messenger'|trans({}, 'FOSMessageBundle') }}</h1>
+
+    <ul>
+        <li>
+            <a href="{{ url('fos_message_inbox') }}">
+                {{ 'boxes.inbox'|trans({}, 'FOSMessageBundle') }}
+            </a>
+        </li>
+        <li>
+            <a href="{{ url('fos_message_sent') }}">
+                {{ 'boxes.sent'|trans({}, 'FOSMessageBundle') }}
+            </a>
+        </li>
+        <li>
+            <a href="{{ url('fos_message_deleted') }}">
+                {{ 'boxes.deleted'|trans({}, 'FOSMessageBundle') }}
+            </a>
+        </li>
+    </ul>
+
+    {% block fos_message_page %}{% endblock %}
+{% endblock %}
