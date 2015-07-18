@@ -1,0 +1,34 @@
+FOS\MessageBundle\Form\Model\NewThreadModel:
+    properties:
+        recipient:
+            - FOS\MessageBundle\Validator\Authorization: ~
+            - FOS\MessageBundle\Validator\SelfRecipient: ~
+            - NotBlank: { message: fos_message.recipient.blank }
+            - Type: { type: FOS\MessageBundle\Model\ParticipantInterface }
+        subject:
+            - NotBlank: { message: fos_message.subject.blank }
+            - Length: { min: 2, max: 255, minMessage: fos_message.subject.short, maxMessage: fos_message.subject.long }
+        content:
+            - NotBlank: { message: fos_message.body.blank }
+            - Length: { min: 2, minMessage: fos_message.body.short }
+
+FOS\MessageBundle\Form\Model\NewThreadMultipleModel:
+    properties:
+        recipients:
+            - All:
+                - FOS\MessageBundle\Validator\Authorization: ~
+                - FOS\MessageBundle\Validator\SelfRecipient: ~
+                - NotBlank: { message: fos_message.recipients.blank }
+                - Type: { type: FOS\MessageBundle\Model\ParticipantInterface }
+        subject:
+            - NotBlank: { message: fos_message.subject.blank }
+            - Length: { min: 2, max: 255, minMessage: fos_message.subject.short, maxMessage: fos_message.subject.long }
+        content:
+            - NotBlank: { message: fos_message.body.blank }
+            - Length: { min: 2, minMessage: fos_message.body.short }
+
+FOS\MessageBundle\Form\Model\ReplyModel:
+    properties:
+        content:
+            - NotBlank: { message: fos_message.body.blank }
+            - Length: { min: 2, minMessage: fos_message.body.short }

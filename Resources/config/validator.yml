@@ -1,0 +1,23 @@
+services:
+
+    fos_message.validator.authorization:
+        class: FOS\MessageBundle\Validator\AuthorizationValidator
+        arguments:
+            - @fos_message.authorizer
+        tags:
+            - { name: validator.constraint_validator, alias: fos_message.validator.authorization }
+
+    fos_message.validator.reply_authorization:
+        class: FOS\MessageBundle\Validator\ReplyAuthorizationValidator
+        arguments:
+            - @fos_message.authorizer
+            - @fos_message.participant_provider
+        tags:
+            - { name: validator.constraint_validator, alias: fos_message.validator.reply_authorization }
+
+    fos_message.validator.self_recipient:
+        class: FOS\MessageBundle\Validator\SelfRecipientValidator
+        arguments:
+            - @fos_message.participant_provider
+        tags:
+            - { name: validator.constraint_validator, alias: fos_message.validator.self_recipient }

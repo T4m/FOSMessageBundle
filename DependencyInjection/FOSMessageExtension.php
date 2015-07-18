@@ -53,6 +53,9 @@ class FOSMessageExtension extends Extension
         // Forms
         $loader->load('form.yml');
 
+        // Validation
+        $loader->load('validator.yml');
+
         // If FOSUser is detected, load its integration
         $this->isFosUserBundleDetected = class_exists('\FOS\UserBundle\FOSUserBundle', true);
 
