@@ -1,5 +1,8 @@
 services:
 
+    #
+    # Validation constraints
+    #
     fos_message.validator.authorization:
         class: FOS\MessageBundle\Validator\AuthorizationValidator
         arguments:

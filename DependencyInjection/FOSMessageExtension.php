@@ -11,10 +11,13 @@
 
 namespace FOS\MessageBundle\DependencyInjection;
 
+use FOS\MessageBundle\Bridge\BridgeManager;
+use RuntimeException;
 use InvalidArgumentException;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
@@ -25,8 +28,6 @@ use Symfony\Component\DependencyInjection\Loader;
  */
 class FOSMessageExtension extends Extension
 {
-    private $isFosUserBundleDetected = false;
-
     /**
      * {@inheritdoc}
      */
@@ -45,7 +46,7 @@ class FOSMessageExtension extends Extension
         }
 
         // Driver
-        $loader->load(sprintf('%s.yml', $config['driver']));
+        $loader->load(sprintf('drivers/%s.yml', $config['driver']));
 
         // Services
         $loader->load('config.yml');
@@ -56,22 +57,50 @@ class FOSMessageExtension extends Extension
         // Validation
         $loader->load('validator.yml');
 
-        // If FOSUser is detected, load its integration
-        $this->isFosUserBundleDetected = class_exists('\FOS\UserBundle\FOSUserBundle', true);
+        // Enable bridges
+        $bridgesManager = $container->get('fos_message.bridges_manager');
 
-        if ($this->isFosUserBundleDetected) {
-            $loader->load('fosuser.yml');
+        foreach ($config['bridges'] as $bridge) {
+            $bridgesManager->enable($bridge);
         }
+
+        // Theme
+        $container->setParameter('fos_message.theme', $config['theme']);
 
         // Load services
         $this->loadModels($config, $container);
         $this->loadServices($config, $container);
         $this->loadForms($config, $container);
 
-        // Theme
-        $container->setParameter('fos_message.theme', $config['theme']);
+        // Load bridges
+        $this->loadBridges($loader, $bridgesManager, $container);
     }
 
+
+    /**
+     * @param Loader\YamlFileLoader $loader
+     * @param BridgeManager $manager
+     * @param ContainerBuilder $container
+     *
+     * @throws RuntimeException
+     */
+    private function loadBridges(Loader\YamlFileLoader $loader, BridgeManager $manager, ContainerBuilder $container)
+    {
+        /*
+         * FOSUserBundle
+         */
+        if ($manager->isEnabled('fos_user')) {
+            $loader->load('bridges/fos_user.yml');
+
+            if ('_default_' === $container->getParameter('fos_message.field_type.recipient')) {
+                $container->setParameter('fos_message.field_type.recipient', 'fos_user_recipient');
+            }
+        } else {
+            throw new RuntimeException(
+                'You have to implement your own recipient field type (or use the FOSUserBundle bridge)'
+            );
+        }
+    }
 
     /**
      * Set models parameters in container for ModelBuilder
@@ -134,16 +163,6 @@ class FOSMessageExtension extends Extension
      */
     private function loadForms(array $config, ContainerBuilder $container)
     {
-        if ('_default_' === $config['fields']['recipient']) {
-            if (! $this->isFosUserBundleDetected) {
-                throw new InvalidArgumentException(
-                    'FOSUserBundle is not detected so you have to implement your own recipient field type'
-                );
-            }
-
-            $config['fields']['recipient'] = 'fos_user_recipient';
-        }
-
         $container->setParameter('fos_message.field_type.recipient', $config['fields']['recipient']);
         $container->setParameter('fos_message.field_type.subject', $config['fields']['subject']);
         $container->setParameter('fos_message.field_type.content', $config['fields']['content']);

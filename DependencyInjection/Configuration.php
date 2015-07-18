@@ -33,7 +33,7 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->enumNode('driver')->values([ 'orm', 'odm' ])->cannotBeOverwritten()->isRequired()->end()
                 ->enumNode('theme')->values([ 'default', 'bootstrap3' ])->defaultValue('default')->end()
-                ->variableNode('extensions')->defaultValue([])->end()
+                ->variableNode('bridges')->defaultValue([])->end()
                 ->arrayNode('models')
                     ->isRequired()
                     ->children()

@@ -86,7 +86,6 @@ services:
             - @fos_message.updater
             - @fos_message.remover
 
-
     #
     # Participant provider
     #
@@ -116,3 +115,11 @@ services:
             - @fos_message.forms.action.type
         tags:
             - { name: twig.extension }
+
+    #
+    # Bridges manager
+    #
+    fos_message.bridges_manager:
+        class: FOS\MessageBundle\Bridge\BridgeManager
+        arguments:
+            - @service_container
