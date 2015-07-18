@@ -31,7 +31,7 @@ class ReplyFormType extends AbstractFormType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('content', $this->contentFieldAlias, [
-            'label' => 'body',
+            'label' => 'list.header.content',
             'translation_domain' => 'FOSMessageBundle',
         ]);
     }

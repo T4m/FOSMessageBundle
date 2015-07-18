@@ -34,17 +34,17 @@ class NewThreadMultipleFormType extends AbstractFormType
             'type' => $this->recipientFieldAlias,
             'allow_add' => 'true',
             'allow_delete' => 'true',
-            'label' => 'recipients',
+            'label' => 'list.header.recipients',
             'translation_domain' => 'FOSMessageBundle',
         ]);
 
         $builder->add('subject', $this->subjectFieldAlias, [
-            'label' => 'subject',
+            'label' => 'list.header.subject',
             'translation_domain' => 'FOSMessageBundle',
         ]);
 
         $builder->add('content', $this->contentFieldAlias, [
-            'label' => 'subject',
+            'label' => 'list.header.content',
             'translation_domain' => 'FOSMessageBundle',
         ]);
     }
