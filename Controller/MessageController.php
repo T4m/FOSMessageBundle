@@ -52,7 +52,7 @@ final class MessageController extends Controller
         $threads = $this->dispatchPageListEvent($threads, Events::PAGE_INBOX);
 
         if ($this->get('fos_message.bridges_manager')->isEnabled('knp_paginator')) {
-            $threads = $this->get('fos_message.statement_paginator')->paginate($threads, $request);
+            $threads = $this->get('fos_message.knp_paginator.paginator')->paginate($threads, $request);
         }
 
         return $this->renderThemed('inbox.html.twig', [
@@ -83,7 +83,7 @@ final class MessageController extends Controller
         $threads = $this->dispatchPageListEvent($threads, Events::PAGE_SENT);
 
         if ($this->get('fos_message.bridges_manager')->isEnabled('knp_paginator')) {
-            $threads = $this->get('fos_message.statement_paginator')->paginate($threads, $request);
+            $threads = $this->get('fos_message.knp_paginator.paginator')->paginate($threads, $request);
         }
 
         return $this->renderThemed('sent.html.twig', [
@@ -114,7 +114,7 @@ final class MessageController extends Controller
         $threads = $this->dispatchPageListEvent($threads, Events::PAGE_DELETED);
 
         if ($this->get('fos_message.bridges_manager')->isEnabled('knp_paginator')) {
-            $threads = $this->get('fos_message.statement_paginator')->paginate($threads, $request);
+            $threads = $this->get('fos_message.knp_paginator.paginator')->paginate($threads, $request);
         }
 
         return $this->renderThemed('deleted.html.twig', [

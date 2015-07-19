@@ -3,7 +3,7 @@ services:
     #
     # Driver statements paginator
     #
-    fos_message.statement_paginator:
+    fos_message.knp_paginator.paginator:
         class: FOS\MessageBundle\Bridge\KnpPaginator\Paginator\StatementPaginator
         arguments:
             - @knp_paginator
