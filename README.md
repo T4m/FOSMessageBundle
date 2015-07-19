@@ -1,5 +1,7 @@
 # FOSMessageBundle
 
+[![Build Status](https://travis-ci.org/tgalopin/FOSMessageBundle.svg)](https://travis-ci.org/tgalopin/FOSMessageBundle)
+
 The FOSMessage bundle is a Symfony implementation of the
 [FOSMessage library](https://github.com/tgalopin/FOSMessage).
 It provides user-to-user messaging features to your Symfony application.
