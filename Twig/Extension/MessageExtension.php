@@ -200,7 +200,9 @@ class MessageExtension extends \Twig_Extension
     public function countInboxNew()
     {
         if (! array_key_exists('count_inbox_new', $this->cache)) {
-            $this->cache['count_inbox_new'] = 0;
+            $participant = $this->participantProvider->getAuthenticatedParticipant();
+
+            $this->cache['count_inbox_new'] = $this->provider->countInboxNewThreads($participant);
         }
 
         return $this->cache['count_inbox_new'];
