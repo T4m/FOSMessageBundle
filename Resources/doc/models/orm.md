@@ -25,14 +25,14 @@ fos_message:
         thread_metadata_class: AppBundle\Entity\ThreadMetadata
 ```
 
-[Continue with the installation][]
+[Continue with the installation](../01-installation.md)
 
 Message class
 -------------
 
 ```php
 <?php
-// src/Acme/MessageBundle/Entity/Message.php
+// src/AppBundle/Entity/Message.php
 
 namespace AppBundle\Entity;
 
@@ -81,7 +81,7 @@ MessageMetadata class
 
 ```php
 <?php
-// src/Acme/MessageBundle/Entity/MessageMetadata.php
+// src/AppBundle/Entity/MessageMetadata.php
 
 namespace AppBundle\Entity;
 
@@ -123,7 +123,7 @@ Thread class
 
 ```php
 <?php
-// src/Acme/MessageBundle/Entity/Thread.php
+// src/AppBundle/Entity/Thread.php
 
 namespace AppBundle\Entity;
 
@@ -170,7 +170,7 @@ ThreadMetadata class
 
 ```php
 <?php
-// src/Acme/MessageBundle/Entity/ThreadMetadata.php
+// src/AppBundle/Entity/ThreadMetadata.php
 
 namespace AppBundle\Entity;
 

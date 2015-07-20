@@ -6,8 +6,8 @@ Setting up FOSMessageBundle
 The first step is to tell composer that you want to download FOSMessageBundle which can
 be achieved by typing the following at the command prompt:
 
-```bash
-$ composer require tgalopin/message-bundle
+``` bash
+composer require tgalopin/message-bundle
 ```
 
 ### Step 2 - Setting up your user class
@@ -30,6 +30,15 @@ use FOS\UserBundle\Model\User as BaseUser;
  */
 class User extends BaseUser implements ParticipantInterface
 {
+    /**
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+    
+    // Your code ...
 }
 ```
 
