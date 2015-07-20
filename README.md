@@ -1,12 +1,41 @@
-# FOSMessageBundle
+FOSMessageBundle
+================
 
 [![Build Status](https://travis-ci.org/tgalopin/FOSMessageBundle.svg)](https://travis-ci.org/tgalopin/FOSMessageBundle)
 
-The FOSMessage bundle is a Symfony implementation of the
-[FOSMessage library](https://github.com/tgalopin/FOSMessage).
-It provides user-to-user messaging features to your Symfony application.
+This bundle is a Symfony implementation of the [FOSMessage library](https://github.com/tgalopin/FOSMessage).
 
 This bundle is in active development and is not ready for the moment.
 Please do not use it in production.
 
-Don't hesitate to play with it and contribute!
+It provides user-to-user messaging features to your Symfony application.
+
+- Support for both the Doctrine ORM and ODM for message storage
+- Integration with 
+
+Features available include:
+
+- Support for both the Doctrine ORM *(and ODM comming soon)* for message storage
+- Threaded conversations
+- Soft deletion of threads
+- Permissions for messaging
+- Integration with FOSUserBundle for user chooser
+- Integration with KnpPaginatorBundle for easy pagination
+- Integration with Bootstrap3 (theme provided)
+
+
+Documentation
+-------------
+
+Documentation for this bundle is stored under `Resources/doc` in this repository.
+
+[Read the documentation for master](https://github.com/FriendsOfSymfony/FOSMessageBundle/blob/master/Resources/doc/00-index.md)
+
+License
+-------
+
+This bundle is under the MIT license. See the complete license in the bundle:
+
+```
+Resources/meta/LICENSE
+```
