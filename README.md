@@ -10,7 +10,7 @@ Please do not use it in production.
 
 Features available include:
 
-- Support for both the Doctrine ORM *(and ODM comming soon)* for message storage
+- Support for the Doctrine ORM *(and ODM comming soon)* for message storage
 - Threaded conversations
 - Soft deletion of threads
 - Permissions for messaging
@@ -24,7 +24,7 @@ Documentation
 
 Documentation for this bundle is stored under `Resources/doc` in this repository.
 
-[Read the documentation for master](https://github.com/FriendsOfSymfony/FOSMessageBundle/blob/master/Resources/doc/00-index.md)
+[Read the documentation for master](https://github.com/tgalopin/FOSMessageBundle/blob/master/Resources/doc/00-index.md)
 
 License
 -------
