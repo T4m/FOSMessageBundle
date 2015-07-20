@@ -20,14 +20,12 @@ Features include:
 - Integration with KnpPaginatorBundle for easy pagination
 - Integration with Bootstrap3 (theme provided)
 
-**Note**: This bundle is based on the [FOSMessage library](https://github.com/tgalopin/FOSMessage).
-
 Documentation
 -------------
 
 The documentation is stored in the `Resources/doc/` directory in this bundle:
 
-[Read the Documentation](https://github.com/tgalopin/FOSMessageBundle/blob/master/Resources/doc/index.md)
+[Read the Documentation](https://github.com/tgalopin/FOSMessageBundle/blob/master/Resources/doc/00-index.md)
 
 Installation
 ------------
