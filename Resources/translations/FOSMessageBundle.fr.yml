@@ -1,27 +1,43 @@
-messenger:      Messagerie
-inbox:          Boîte de réception
-sent:           Envoyés
-deleted:        Supprimés
-send_new:       Envoyer un nouveau message
-search:         Rechercher
-threads_found:  %num% conversation trouvée avec | %num% conversations trouvées avec
 
-message_info:   De %sender%, le %date%
-reply:          Répondre
+# Global strings
+layout:
+    messenger: Messagerie
+    inbox: 'Boîte de réception'
+    sent: Envoyés
+    deleted: Supprimés
 
-subject:        Sujet
-starter:        Débuté par
-startdate:      Débuté le
-messages:       Messages
-last_message:   Dernier message
-actions:        Actions
-new:            Nouveau
-goto_last:      Aller au dernier message
-on:             Le %date%
-by:             De %sender%
-no_thread:      Aucune conversation
-delete:         Supprimer
-undelete:       Restaurer
-recipient:      Destinataire
-recipients:     Destinataires
-body:           Corps
+# Form field labels
+form:
+    subject: Sujet
+    content: Corps
+    recipient: Destinataire
+    recipients: Destinataires
+
+# Actions buttons
+actions:
+    new: 'Envoyer un nouveau message'
+    reply: Répondre
+    delete: Supprimer
+    undelete: Restaurer
+    read: ''
+    unread: ''
+
+# Search
+search:
+    placeholder: Rechercher
+    results_found: '%num% conversation trouvée avec | %num% conversations trouvées avec'
+
+# Thread lists
+list:
+    subject: Sujet
+    starter: 'Débuté par'
+    startdate: 'Débuté le'
+    messages: Messages
+    last_message: 'Dernier message'
+    actions: Actions
+    message_info: 'De %sender%, le %date%'
+    is_new: Nouveau
+    goto_last: 'Aller au dernier message'
+    'on': 'Le %date%'
+    by: 'De %sender%'
+    no_thread: 'Aucune conversation'

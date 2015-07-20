@@ -2,22 +2,22 @@
     <thead>
         <tr>
             <th class="fos_message_threads_subject">
-                {{ 'list.header.subject'|trans({}, 'FOSMessageBundle') }}
+                {{ 'list.subject'|trans({}, 'FOSMessageBundle') }}
             </th>
             <th class="fos_message_threads_starter">
-                {{ 'list.header.starter'|trans({}, 'FOSMessageBundle') }}
+                {{ 'list.starter'|trans({}, 'FOSMessageBundle') }}
             </th>
             <th class="fos_message_threads_startdate">
-                {{ 'list.header.startdate'|trans({}, 'FOSMessageBundle') }}
+                {{ 'list.startdate'|trans({}, 'FOSMessageBundle') }}
             </th>
             <th class="fos_message_threads_messages">
-                {{ 'list.header.messages'|trans({}, 'FOSMessageBundle') }}
+                {{ 'list.messages'|trans({}, 'FOSMessageBundle') }}
             </th>
             <th class="fos_message_threads_last_message">
-                {{ 'list.header.last_message'|trans({}, 'FOSMessageBundle') }}
+                {{ 'list.last_message'|trans({}, 'FOSMessageBundle') }}
             </th>
             <th class="fos_message_threads_actions">
-                {{ 'list.header.actions'|trans({}, 'FOSMessageBundle') }}
+                {{ 'list.actions'|trans({}, 'FOSMessageBundle') }}
             </th>
         </tr>
     </thead>
@@ -33,7 +33,7 @@
                     </a>
 
                     {% if thread_is_new %}
-                        ({{ 'list.data.is_new'|trans({}, 'FOSMessageBundle') }})
+                        ({{ 'list.is_new'|trans({}, 'FOSMessageBundle') }})
                     {% endif %}
                 </td>
                 <td class="fos_message_threads_starter">
@@ -48,12 +48,12 @@
                 <td class="fos_message_threads_last_message">
                     {% if thread.messages.last %}
                         <a href="{{ url('fos_message_thread_view', {'threadId': thread.id}) }}#message_{{ thread.messages.last.id }}"
-                           title="{{ 'list.data.goto_last'|trans({}, 'FOSMessageBundle') }}">
+                           title="{{ 'list.goto_last'|trans({}, 'FOSMessageBundle') }}">
                             →
                         </a>
-                        {{ 'list.data.on'|trans({'%date%': thread.messages.last.createdAt|date}, 'FOSMessageBundle') }}
+                        {{ 'list.on'|trans({'%date%': thread.messages.last.createdAt|date}, 'FOSMessageBundle') }}
                         <br />
-                        {{ 'list.data.by'|trans({'%sender%': thread.messages.last.author|e}, 'FOSMessageBundle') }}
+                        {{ 'list.by'|trans({'%sender%': thread.messages.last.author|e}, 'FOSMessageBundle') }}
                     {% else %}
                         ----
                     {% endif %}
@@ -97,7 +97,7 @@
         {% else %}
             <tr>
                 <td colspan="6">
-                    {{ 'list.data.no_thread'|trans({}, 'FOSMessageBundle') }}
+                    {{ 'list.no_thread'|trans({}, 'FOSMessageBundle') }}
                 </td>
             </tr>
         {% endfor %}

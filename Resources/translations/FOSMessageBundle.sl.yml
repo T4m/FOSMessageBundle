@@ -1,24 +1,43 @@
-messenger:      Messenger
-inbox:          Prejeto
-sent:           Poslano
-deleted:        Izbrisano
-send_new:       Pošlji novo sporočilo
-search:         Iskanje
-threads_found:  %num% najden pogovor | %num% najdena pogovora | %num% najdeni pogovori | %num% najdenih pogovorov
 
-message_info:   Od %sender%, %date%
-reply:          Odgovori
+# Global strings
+layout:
+    messenger: Messenger
+    inbox: Prejeto
+    sent: Poslano
+    deleted: Izbrisano
 
-subject:        Zadeva
-starter:        Prvi avtor
-startdate:      Začetni datum
-messages:       Sporočila
-last_message:   Zadnje sporočilo
-actions:        Akcije
-new:            Novo
-goto_last:      Pojdi na zadnje sporočilo
-on:             %date%
-by:             Od %sender%
-no_thread:      Ni pogovorov za prikaz
-delete:         Izbriši
-undelete:       Odbriši
+# Form field labels
+form:
+    subject: Zadeva
+    content: ''
+    recipient: ''
+    recipients: ''
+
+# Actions buttons
+actions:
+    new: 'Pošlji novo sporočilo'
+    reply: Odgovori
+    delete: Izbriši
+    undelete: Odbriši
+    read: ''
+    unread: ''
+
+# Search
+search:
+    placeholder: Iskanje
+    results_found: '%num% najden pogovor | %num% najdena pogovora | %num% najdeni pogovori | %num% najdenih pogovorov'
+
+# Thread lists
+list:
+    subject: Zadeva
+    starter: 'Prvi avtor'
+    startdate: 'Začetni datum'
+    messages: Sporočila
+    last_message: 'Zadnje sporočilo'
+    actions: Akcije
+    message_info: 'Od %sender%, %date%'
+    is_new: Novo
+    goto_last: 'Pojdi na zadnje sporočilo'
+    'on': '%date%'
+    by: 'Od %sender%'
+    no_thread: 'Ni pogovorov za prikaz'

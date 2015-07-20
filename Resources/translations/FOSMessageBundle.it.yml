@@ -1,22 +1,43 @@
-messenger:      Messaggi
-inbox:          Posta in arrivo
-sent:           Posta inviata
-deleted:        Cestino
-send_new:       Scrivere un nuovo messaggio
-search:         Cercare
-threads_found:  %num% conversazione trovata con | %num%  conversazioni trovate con
 
-message_info:   Di %sender%, il %date%
-reply:          Rispondere
+# Global strings
+layout:
+    messenger: Messaggi
+    inbox: 'Posta in arrivo'
+    sent: 'Posta inviata'
+    deleted: Cestino
 
-subject:        Oggetto
-starter:        Iniziato da
-startdate:      Iniziato il
-messages:       Messaggi
-last_message:   Ultimo messaggio
-actions:        Azioni
-new:            Nuovo
-goto_last:      Vedere l’ultimo messaggio
-on:             Il %date%
-by:             Di %sender%
-no_thread:      Nessuna conversazione
+# Form field labels
+form:
+    subject: Oggetto
+    content: ''
+    recipient: ''
+    recipients: ''
+
+# Actions buttons
+actions:
+    new: 'Scrivere un nuovo messaggio'
+    reply: Rispondere
+    delete: ''
+    undelete: ''
+    read: ''
+    unread: ''
+
+# Search
+search:
+    placeholder: Cercare
+    results_found: '%num% conversazione trovata con | %num%  conversazioni trovate con'
+
+# Thread lists
+list:
+    subject: Oggetto
+    starter: 'Iniziato da'
+    startdate: 'Iniziato il'
+    messages: Messaggi
+    last_message: 'Ultimo messaggio'
+    actions: Azioni
+    message_info: 'Di %sender%, il %date%'
+    is_new: Nuovo
+    goto_last: 'Vedere l’ultimo messaggio'
+    'on': 'Il %date%'
+    by: 'Di %sender%'
+    no_thread: 'Nessuna conversazione'

@@ -1,24 +1,43 @@
-messenger:      پیام‌رسان
-inbox:          صندوق دریافتی
-sent:           ارسالی
-deleted:        حذف‌شده
-send_new:       فرستادن یک پیام جدید
-search:         جستجو
-threads_found:  %num% مورد یافت شد | %num% مورد یافت شد
 
-message_info:   توسط %sender%، در %date%
-reply:          پاسخ
+# Global strings
+layout:
+    messenger: پیام‌رسان
+    inbox: 'صندوق دریافتی'
+    sent: ارسالی
+    deleted: حذف‌شده
 
-subject:        موضوع
-starter:        شروع‌کننده
-startdate:      تاریخ شروع
-messages:       پیام‌ها
-last_message:   آخرین پیام
-actions:        عملیات‌ها
-new:            جدید
-goto_last:      برو به آخرین پیام
-on:             در %date%
-by:             توسط %sender%
-no_thread:      هیچ مورد جدیدی برای نمایش وجود ندارد.
-delete:         حذف
-undelete:       از حذف درآوردن
+# Form field labels
+form:
+    subject: موضوع
+    content: ''
+    recipient: ''
+    recipients: ''
+
+# Actions buttons
+actions:
+    new: 'فرستادن یک پیام جدید'
+    reply: پاسخ
+    delete: حذف
+    undelete: 'از حذف درآوردن'
+    read: ''
+    unread: ''
+
+# Search
+search:
+    placeholder: جستجو
+    results_found: '%num% مورد یافت شد | %num% مورد یافت شد'
+
+# Thread lists
+list:
+    subject: موضوع
+    starter: شروع‌کننده
+    startdate: 'تاریخ شروع'
+    messages: پیام‌ها
+    last_message: 'آخرین پیام'
+    actions: عملیات‌ها
+    message_info: 'توسط %sender%، در %date%'
+    is_new: جدید
+    goto_last: 'برو به آخرین پیام'
+    'on': 'در %date%'
+    by: 'توسط %sender%'
+    no_thread: 'هیچ مورد جدیدی برای نمایش وجود ندارد.'

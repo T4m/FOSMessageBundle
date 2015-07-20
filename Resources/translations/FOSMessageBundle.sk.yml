@@ -1,23 +1,43 @@
-messenger:      Messenger
-inbox:          Prijaté správy
-sent:           Odoslané správy
-deleted:        Vymazané správy
-send_new:       Napísať správu
-search:         Hľadať
-threads_found:  %num% Konverzácia nájdená s | %num% Konverzácií nájdených s
 
-message_info:   Od %sender%, %date%
-reply:          Odpovedať
+# Global strings
+layout:
+    messenger: Messenger
+    inbox: 'Prijaté správy'
+    sent: 'Odoslané správy'
+    deleted: 'Vymazané správy'
 
-subject:        Predmet
-starter:        Iniciátor
-startdate:      Začaté
-messages:       Počet správ
-last_message:   Posledná správa
-actions:        Akcie
-new:            Nová
-goto_last:      Ísť na poslednú správu
-on:             %date%
-by:             od %sender%
-no_thread:      Neexistujú správy, ktoré by bolo možné zobraziť
-delete:         Vymazať
+# Form field labels
+form:
+    subject: Predmet
+    content: ''
+    recipient: ''
+    recipients: ''
+
+# Actions buttons
+actions:
+    new: 'Napísať správu'
+    reply: Odpovedať
+    delete: Vymazať
+    undelete: ''
+    read: ''
+    unread: ''
+
+# Search
+search:
+    placeholder: Hľadať
+    results_found: '%num% Konverzácia nájdená s | %num% Konverzácií nájdených s'
+
+# Thread lists
+list:
+    subject: Predmet
+    starter: Iniciátor
+    startdate: Začaté
+    messages: 'Počet správ'
+    last_message: 'Posledná správa'
+    actions: Akcie
+    message_info: 'Od %sender%, %date%'
+    is_new: Nová
+    goto_last: 'Ísť na poslednú správu'
+    'on': '%date%'
+    by: 'od %sender%'
+    no_thread: 'Neexistujú správy, ktoré by bolo možné zobraziť'

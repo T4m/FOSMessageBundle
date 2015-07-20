@@ -1,22 +1,43 @@
-messenger:      Meddelanden
-inbox:          Inkorg
-sent:           Skickat
-send_new:       Skriv nytt meddelande
-search:         Sök
-threads_found:  %num% tråd hittad | %num% trådar hittade
 
-message_info:   Av %sender%, den %date%
-reply:          Svara
+# Global strings
+layout:
+    messenger: Meddelanden
+    inbox: Inkorg
+    sent: Skickat
+    deleted: ''
 
-subject:        Ämne
-starter:        Avsändare
-startdate:      Påbörjad den
-messages:       Meddelanden
-last_message:   Senaste meddelande
-actions:        Åtgärder
-new:            Ny
-goto_last:      Gå till senaste meddelande
-on:             den %date%
-by:             av %sender%
-no_thread:      Det finns inga trådar
-delete:         Ta bort
+# Form field labels
+form:
+    subject: Ämne
+    content: ''
+    recipient: ''
+    recipients: ''
+
+# Actions buttons
+actions:
+    new: 'Skriv nytt meddelande'
+    reply: Svara
+    delete: 'Ta bort'
+    undelete: ''
+    read: ''
+    unread: ''
+
+# Search
+search:
+    placeholder: Sök
+    results_found: '%num% tråd hittad | %num% trådar hittade'
+
+# Thread lists
+list:
+    subject: Ämne
+    starter: Avsändare
+    startdate: 'Påbörjad den'
+    messages: Meddelanden
+    last_message: 'Senaste meddelande'
+    actions: Åtgärder
+    message_info: 'Av %sender%, den %date%'
+    is_new: Ny
+    goto_last: 'Gå till senaste meddelande'
+    'on': 'den %date%'
+    by: 'av %sender%'
+    no_thread: 'Det finns inga trådar'

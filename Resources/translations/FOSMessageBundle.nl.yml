@@ -1,23 +1,43 @@
-messenger:      Messenger
-inbox:          Ontvangen
-sent:           Verzonden
-deleted:        Verwijderd
-send_new:       Verstuur een nieuw bericht
-search:         Zoek
-threads_found:  %num% bericht gevonden met | %num% berichten gevonden met
 
-message_info:   Door %sender%, op %date%
-reply:          Reageer
+# Global strings
+layout:
+    messenger: Messenger
+    inbox: Ontvangen
+    sent: Verzonden
+    deleted: Verwijderd
 
-subject:        Onderwerp
-starter:        Starter
-startdate:      Start datum
-messages:       Berichten
-last_message:   Laatste bericht
-actions:        Acties
-new:            Nieuw
-goto_last:      Ga naar laatste bericht
-on:             Op %date%
-by:             Door %sender%
-no_thread:      Geen onderwerpen gevonden
-delete:         Verwijder
+# Form field labels
+form:
+    subject: Onderwerp
+    content: ''
+    recipient: ''
+    recipients: ''
+
+# Actions buttons
+actions:
+    new: 'Verstuur een nieuw bericht'
+    reply: Reageer
+    delete: Verwijder
+    undelete: ''
+    read: ''
+    unread: ''
+
+# Search
+search:
+    placeholder: Zoek
+    results_found: '%num% bericht gevonden met | %num% berichten gevonden met'
+
+# Thread lists
+list:
+    subject: Onderwerp
+    starter: Starter
+    startdate: 'Start datum'
+    messages: Berichten
+    last_message: 'Laatste bericht'
+    actions: Acties
+    message_info: 'Door %sender%, op %date%'
+    is_new: Nieuw
+    goto_last: 'Ga naar laatste bericht'
+    'on': 'Op %date%'
+    by: 'Door %sender%'
+    no_thread: 'Geen onderwerpen gevonden'

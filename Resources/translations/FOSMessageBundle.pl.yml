@@ -1,27 +1,43 @@
-messenger:      Wiadomości
-inbox:          Skrzynka Odbiorcza
-sent:           Wysłane
-deleted:        Usunięte
-send_new:       Wyślij nową wiadomość
-search:         Szukaj
-threads_found:  Znaleziono %num% wątek | Znaleziono %num% wątki | Znaleziono %num% wątków
 
-message_info:   Od %sender%, %date%
-reply:          Odpowiedz
+# Global strings
+layout:
+    messenger: Wiadomości
+    inbox: 'Skrzynka Odbiorcza'
+    sent: Wysłane
+    deleted: Usunięte
 
-subject:        Temat
-starter:        Nadawca
-startdate:      Data rozpoczęcia
-messages:       Wiadomości
-last_message:   Ostatnia wiadomość
-actions:        Akcje
-new:            Nowa
-goto_last:      Idź do ostatniej wiadomości
-on:             data %date%
-by:             Od %sender%
-no_thread:      Brak wiadomości do wyświetlenia
-delete:         Usuń
-undelete:       Przywróć
-recipient:      Odbiorca
-recipients:     Odbiorcy
-body:           Treść
+# Form field labels
+form:
+    subject: Temat
+    content: Treść
+    recipient: Odbiorca
+    recipients: Odbiorcy
+
+# Actions buttons
+actions:
+    new: 'Wyślij nową wiadomość'
+    reply: Odpowiedz
+    delete: Usuń
+    undelete: Przywróć
+    read: ''
+    unread: ''
+
+# Search
+search:
+    placeholder: Szukaj
+    results_found: 'Znaleziono %num% wątek | Znaleziono %num% wątki | Znaleziono %num% wątków'
+
+# Thread lists
+list:
+    subject: Temat
+    starter: Nadawca
+    startdate: 'Data rozpoczęcia'
+    messages: Wiadomości
+    last_message: 'Ostatnia wiadomość'
+    actions: Akcje
+    message_info: 'Od %sender%, %date%'
+    is_new: Nowa
+    goto_last: 'Idź do ostatniej wiadomości'
+    'on': 'data %date%'
+    by: 'Od %sender%'
+    no_thread: 'Brak wiadomości do wyświetlenia'

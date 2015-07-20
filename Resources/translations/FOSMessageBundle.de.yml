@@ -1,23 +1,43 @@
-messenger:      Messenger
-inbox:          Posteingang
-sent:           Postausgang
-deleted:        Gelöscht
-send_new:       Neue Nachricht senden
-search:         Suche
-threads_found:  %num% Konversation gefunden mit | %num% Konversationen gefunden mit
 
-message_info:   Von %sender%, am %date%
-reply:          Antworten
+# Global strings
+layout:
+    messenger: Messenger
+    inbox: Posteingang
+    sent: Postausgang
+    deleted: Gelöscht
 
-subject:        Betreff
-starter:        Beginner
-startdate:      Angefangen am
-messages:       Nachrichten
-last_message:   Letzte Nachricht
-actions:        Aktionen
-new:            Neu
-goto_last:      Gehe zur letzten Nachricht
-on:             Am %date%
-by:             Von %sender%
-no_thread:      Es gibt keine Konversation zum Anzeigen
-delete:         löschen
+# Form field labels
+form:
+    subject: Betreff
+    content: ''
+    recipient: ''
+    recipients: ''
+
+# Actions buttons
+actions:
+    new: 'Neue Nachricht senden'
+    reply: Antworten
+    delete: löschen
+    undelete: ''
+    read: ''
+    unread: ''
+
+# Search
+search:
+    placeholder: Suche
+    results_found: '%num% Konversation gefunden mit | %num% Konversationen gefunden mit'
+
+# Thread lists
+list:
+    subject: Betreff
+    starter: Beginner
+    startdate: 'Angefangen am'
+    messages: Nachrichten
+    last_message: 'Letzte Nachricht'
+    actions: Aktionen
+    message_info: 'Von %sender%, am %date%'
+    is_new: Neu
+    goto_last: 'Gehe zur letzten Nachricht'
+    'on': 'Am %date%'
+    by: 'Von %sender%'
+    no_thread: 'Es gibt keine Konversation zum Anzeigen'
