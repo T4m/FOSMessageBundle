@@ -8,11 +8,6 @@ This bundle is a Symfony implementation of the [FOSMessage library](https://gith
 This bundle is in active development and is not ready for the moment.
 Please do not use it in production.
 
-It provides user-to-user messaging features to your Symfony application.
-
-- Support for both the Doctrine ORM and ODM for message storage
-- Integration with 
-
 Features available include:
 
 - Support for both the Doctrine ORM *(and ODM comming soon)* for message storage
