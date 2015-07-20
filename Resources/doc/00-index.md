@@ -1,22 +1,139 @@
 Getting started with FOSMessageBundle
 =====================================
 
-## Installation
+The FOSMesageBundle is a bundle creating a bridge between the [FOSMessage library](https://github.com/tgalopin/FOSMessage)
+and Symfony. It extends the library to provide a full-features, easy to install and use 
+messaging system.
 
-Installation of FOSMessageBundle is handled through composer.
+Installation
+------------
 
-[See the installation instructions](01-installation.md)
+This bundle requires Symfony 2.1+ and is no tested with Symfony 2.0.X. It could work or
+require some modifications but this version of Symfony won't be supported.
 
-## Usage
+### Translations
 
-Below is a collection of documentation on how to use and interact with FOSMessageBundle.
+If you wish to use default texts provided in this bundle, you have to make
+sure you have translator enabled in your config.
 
-- [Basic Usage](02-basic-usage.md)
-- [Templating](03-templating.md)
-- [Spam Detection](04-spam-detection.md)
-- [Permissions](05-permissions.md)
-- [Bundle Events](06-events.md)
-- [Multiple Recipients](90-multiple-recipients.md)
-- [Sending a message programatically](90-sending-a-message-programatically.md)
-- [Configuration Reference](99-config-reference.md)
-- [Using other UserBundles](99-using-other-user-bundles.md)
+``` yaml
+# app/config/config.yml
+
+framework:
+    translator: ~
+```
+
+For more information about translations, check [Symfony documentation](http://symfony.com/doc/current/book/translation.html).   
+
+### Step 1: Download FOSMessageBundle using composer
+
+Add FOSUserBundle by running the command:
+
+``` bash
+composer require tgalopin/fos-message-bundle "dev-master"
+```
+
+Composer will install the bundle to your project's `vendor/tgalopin` directory.
+
+### Step 2: Enable the bundle
+
+Enable the bundle in the kernel:
+
+``` php
+<?php
+// app/AppKernel.php
+
+public function registerBundles()
+{
+    $bundles = array(
+        // ...
+        new FOS\MessageBundle\FOSMessageBundle(),
+    );
+}
+```
+
+### Step 3: Setting up your models
+
+FOSMessageBundle provides a flexible set of tools organized around a three main entites:
+messages, threads and users. You need to implement a link between these entities and your
+application for FOSMessageBundle to work properly.
+
+#### Step 3a : User entity
+
+FOSMessageBundle requires that your user class implement `ParticipantInterface`. This
+bundle does not have any direct dependencies to any particular UserBundle or
+implementation of a user, except that it must implement the above interface.
+
+Your user class may look something like the following:
+
+```php
+<?php
+
+use Doctrine\ORM\Mapping as ORM;
+use FOS\Message\Api\Model\ParticipantInterface;
+use FOS\UserBundle\Model\User as BaseUser;
+
+/**
+ * @ORM\Entity
+ */
+class User extends BaseUser implements ParticipantInterface
+{
+    /**
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+    
+    // Your code ...
+}
+```
+
+#### Step 3b : Message and Thread entities
+
+FOSMessageBundle has multiple models that must be implemented by you in an application
+bundle (that may or may not be a child of FOSMessageBundle).
+
+As for the moment only Doctrine ORM is supported, we only provide example for it.
+Stay tuned, other integrations will come soon!
+
+- [Example entities for Doctrine ORM](models/orm.md)
+
+
+### Step 4 : Routing
+
+Add FOSMessageBundle's routing to your application with an optional routing prefix:
+
+```yaml
+# app/config/routing.yml
+
+# ...
+fos_message:
+    resource: "@FOSMessageBundle/Resources/config/routing.yml"
+    prefix: /messages
+# ...
+```
+
+### Step 5: Update your database schema
+
+Now that the bundle is configured, the last thing you need to do is update your
+database schema because you have added a few new entities (messages and threads).
+
+For ORM run the following command.
+
+``` bash
+$ php app/console doctrine:schema:update --force
+```
+
+You now can access your messaging system at `http://app.com/app_dev.php/messages`!
+
+### Next Steps
+
+Now that you have completed the basic installation and configuration of the
+FOSMessageBundle, you are ready to learn about more advanced features and usages
+of the bundle.
+
+The following documents are available:
+
+**TODO**

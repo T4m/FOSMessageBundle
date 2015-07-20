@@ -14,6 +14,7 @@ Features include:
 
 - Messages can be stored via Doctrine ORM *(ODM comming soon)*
 - Threaded conversations with inbox, sentbox and deletedbox
+- Multiple participants conversations option
 - Permissions for messaging
 - Integration with FOSUserBundle for user chooser
 - Integration with KnpPaginatorBundle for easy pagination
