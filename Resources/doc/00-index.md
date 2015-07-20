@@ -2,13 +2,13 @@ Getting started with FOSMessageBundle
 =====================================
 
 The FOSMesageBundle is a bundle creating a bridge between the [FOSMessage library](https://github.com/tgalopin/FOSMessage)
-and Symfony. It extends the library to provide a full-features, easy to install and use 
-messaging system.
+and Symfony. It extends the library to provide a full-featured, easy to install and
+easy to use use messaging system in any Symfony application.
 
 Installation
 ------------
 
-This bundle requires Symfony 2.1+ and is no tested with Symfony 2.0.X. It could work or
+This bundle requires Symfony 2.1+ and is not tested with Symfony 2.0.X. It could work or
 require some modifications but this version of Symfony won't be supported.
 
 ### Translations
@@ -58,7 +58,7 @@ FOSMessageBundle provides a flexible set of tools organized around a three main 
 messages, threads and users. You need to implement a link between these entities and your
 application for FOSMessageBundle to work properly.
 
-#### Step 3a : User entity
+#### Step 3a: User entity
 
 FOSMessageBundle requires that your user class implement `ParticipantInterface`. This
 bundle does not have any direct dependencies to any particular UserBundle or
@@ -90,10 +90,9 @@ class User extends BaseUser implements ParticipantInterface
 }
 ```
 
-#### Step 3b : Message and Thread entities
+#### Step 3b: Message and Thread entities
 
-FOSMessageBundle has multiple models that must be implemented by you in an application
-bundle (that may or may not be a child of FOSMessageBundle).
+FOSMessageBundle has multiple models that must be implemented in your application.
 
 As for the moment only Doctrine ORM is supported, we only provide example for it.
 Stay tuned, other integrations will come soon!
@@ -101,7 +100,7 @@ Stay tuned, other integrations will come soon!
 - [Example entities for Doctrine ORM](models/orm.md)
 
 
-### Step 4 : Routing
+### Step 4: Routing
 
 Add FOSMessageBundle's routing to your application with an optional routing prefix:
 
