@@ -20,8 +20,8 @@ actions:
     reply: رد
     delete: حذف
     undelete: استعادة
-    read: ''
-    unread: ''
+    read: 'Mark as read' # TODO translate
+    unread: 'Mark as unread' # TODO translate
 
 # Search
 search:

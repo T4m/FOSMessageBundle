@@ -45,12 +45,11 @@ Authors
 - [Titouan Galopin](https://github.com/tgalopin) aka [tgalopin](https://twitter.com/titouangalopin)
 - [The Community contributors] (https://github.com/tgalopin/FOSMessageBundle/contributors)
 
-Reporting an issue or a feature request
----------------------------------------
+Contributing
+------------
 
-Issues and feature requests are tracked in the [Github issue tracker](https://github.com/tgalopin/FOSMessageBundle/issues).
+All contributions are very welcomed and everyone can contribute
+(code, translations, documentation, community, ...).
 
-When reporting a bug, it may be a good idea to reproduce it in a basic project
-built using the [Symfony Standard Edition](https://github.com/symfony/symfony-standard)
-to allow developers of the bundle to reproduce the issue by simply cloning it
-and following some steps.
+All the informations that could help you to find how you could contribute are present in the
+[CONTRIBUTE.md file](https://github.com/tgalopin/FOSMessageBundle/blob/master/CONTRIBUTE.md)
