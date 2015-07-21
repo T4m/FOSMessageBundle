@@ -25,7 +25,7 @@ fos_message:
         thread_metadata_class: AppBundle\Entity\ThreadMetadata
 ```
 
-[Continue with the installation](../01-installation.md)
+[Continue with the installation](../00-index.md#step-3b-message-and-thread-entities)
 
 Message class
 -------------
@@ -207,4 +207,4 @@ class ThreadMetadata extends BaseThreadMetadata
 }
 ```
 
-[Continue with the installation](../00-index.md#step-4-routing)
+[Continue with the installation](../00-index.md#step-3b-message-and-thread-entities)

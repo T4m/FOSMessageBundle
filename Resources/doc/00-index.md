@@ -135,4 +135,5 @@ of the bundle.
 
 The following documents are available:
 
+- [1. Integrate FOSMessageBundle to your application](01-integration-to-your-application.md)
 **TODO**
