@@ -49,7 +49,7 @@ Contributing
 ------------
 
 All contributions are very welcomed and everyone can contribute
-(code, translations, documentation, community, ...).
+(code, translations, documentation, community, ...). Please don't hesitate to share your knowledge!
 
 All the informations that could help you to find how you could contribute are present in the
-[CONTRIBUTE.md file](https://github.com/tgalopin/FOSMessageBundle/blob/master/CONTRIBUTE.md)
+[CONTRIBUTE.md file](https://github.com/tgalopin/FOSMessageBundle/blob/master/CONTRIBUTE.md).

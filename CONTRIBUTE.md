@@ -1,13 +1,11 @@
 This is the contribute.md of FOSMessageBundle. Great to have you here.
 Here are a few ways you can help make this project better!
 
-# Contribute.md
-
 ## Team members
 
 The initiative of FOSMessageBundle was started by Thibault Duplessis
 ([thibault.duplessis@gmail.com](mailto:thibault.duplessis@gmail.com)).
-The current version separated in two parts (the library and the bundle) was written by Titouan Galopin
+The current version was written by Titouan Galopin
 ([galopintitouan@gmail.com](mailto:galopintitouan@gmail.com)).
 
 ## Learn & listen
@@ -36,7 +34,7 @@ The best steps to propose a feature are the following:
 
 Don’t get discouraged! The response time from the maintainers is usually quite short (a few days at most).
 
-# Bug triage
+## Bug triage
 
 - Issues and feature requests are tracked in the
   [Github issue tracker](https://github.com/tgalopin/FOSMessageBundle/issues).
@@ -55,7 +53,7 @@ built using the [Symfony Standard Edition](https://github.com/symfony/symfony-st
 to allow developers of the bundle to reproduce the issue by simply cloning it
 and following some steps.
 
-# Beta testing
+## Beta testing
 
 Beta testing is essential in FOSMessageBundle to provide a great Developer and User experience.
 However, for a beta-testing phase to be successful, it requires a lot of tests in real environments,
@@ -66,7 +64,7 @@ The help of every developer is required here for FOSMessageBundle to become a st
 There is for the moment no official roadmap (as the bundle is still under heavy development),
 but please don't hesitate to install it and test it as much as possible!
 
-# Translations
+## Translations
 
 For the moment, there are a lot of uncomplete translations: it's an easy way to contribute to
 the bundle!
@@ -100,7 +98,7 @@ Here is the current state of translations:
 - Slovene: incomplete ✘
 - Swedish: incomplete ✘
 
-# Documentation
+## Documentation
 
 This section includes any help you need with the documentation and where it can be found.
 Code needs explanation, and sometimes those who know the code well have trouble explaining
@@ -108,7 +106,7 @@ it to someone just getting into it.
 
 - [Help us with documentation here](https://github.com/tgalopin/FOSMessageBundle/tree/master/Resources/doc)
 
-# Community
+## Community
 
 This section includes ideas on how non-developers can help with the project. Here's a few examples:
 
@@ -119,7 +117,7 @@ This section includes ideas on how non-developers can help with the project. Her
 - You can show your real-world implementation of FOSMessageBundle of FOSMessage.  Show how
   it’s used in daily life. Take screenshots and make videos!
 
-# More
+## More
 
 If you have further questions, please don't hesitate to contact Titouan Galopin:
 [galopintitouan@gmail.com](mailto:galopintitouan@gmail.com).
