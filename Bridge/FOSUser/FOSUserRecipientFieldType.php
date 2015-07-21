@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace FOS\MessageBundle\Bridge\Field;
+namespace FOS\MessageBundle\Bridge\FOSUser;
 
 use FOS\UserBundle\Form\DataTransformer\UserToUsernameTransformer;
 use Symfony\Component\Form\AbstractType;

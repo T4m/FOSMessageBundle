@@ -31,17 +31,17 @@ class NewThreadFormType extends AbstractFormType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('recipient', $this->recipientFieldAlias, [
-            'label' => 'list.header.recipient',
+            'label' => 'form.recipient',
             'translation_domain' => 'FOSMessageBundle',
         ]);
 
         $builder->add('subject', $this->subjectFieldAlias, [
-            'label' => 'list.header.subject',
+            'label' => 'form.subject',
             'translation_domain' => 'FOSMessageBundle',
         ]);
 
         $builder->add('content', $this->contentFieldAlias, [
-            'label' => 'list.header.content',
+            'label' => 'form.content',
             'translation_domain' => 'FOSMessageBundle',
         ]);
     }
