@@ -135,5 +135,6 @@ of the bundle.
 
 The following documents are available:
 
-- [1. Integrate FOSMessageBundle to your application](01-integration-to-your-application.md)
+- [1. Create the recipient field](01-create-recipient-field.md)
+- [2. Integrate FOSMessageBundle to your application](02-integration-to-your-application.md)
 **TODO**
