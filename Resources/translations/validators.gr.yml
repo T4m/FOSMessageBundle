@@ -1,16 +1,16 @@
 fos_message:
     recipient:
-        blank: 'No recipient specified'
+        blank: 'Δε δόθηκε παραλήπτης'
     recipients:
-        blank: 'No recipients specified'
+        blank: 'Δε δόθηκαν παραλήπτες'
     subject:
-        blank: 'Please enter a subject'
-        short: 'The subject is too short|The subject is too short'
-        long: 'The subject is too long|The subject is too long'
+        blank: 'Παρακαλώ εισάγετε θέμα'
+        short: 'Το θέμα είναι πολύ μικρό|Το θέμα είναι πολύ μικρό'
+        long: 'Το θέμα είναι πολύ μεγάλο|Το θέμα είναι πολύ μεγάλο'
     body:
-        blank: 'Please enter a body'
-        short: 'The body is too short'
-        spam: 'Sorry, your message looks like spam'
-    not_authorized: 'You are not allowed to send this message'
-    reply_not_authorized: 'You are not allowed to reply to this message'
-    self_recipient: 'You cannot send a message to yourself'
+        blank: 'Παρακαλώ εισάγετε κείμενο'
+        short: 'Το κείμενο του μηνύματος είναι πολύ μικρό'
+        spam: 'Συγνώμη, το μήνυμά σας μοιάζει με spam'
+    not_authorized: 'Δεν έχετε δικαίωμα να στείλετε αυτο το μήνυμα'
+    reply_not_authorized: 'Δεν έχετε δικαίωμα να απαντήσετε σε αυτό το μήνυμα'
+    self_recipient: 'Δεν μπορείτε να στείλετε μήνυμα στον εαυτό σας'
