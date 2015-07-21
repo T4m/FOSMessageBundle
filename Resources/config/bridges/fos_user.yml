@@ -4,7 +4,7 @@ services:
     # Recipient field
     #
     fos_message.fos_user.recipient_field_type:
-        class: FOS\MessageBundle\Bridge\FOSUser\Field\FOSUserRecipientFieldType
+        class: FOS\MessageBundle\Bridge\FOSUser\FOSUserRecipientFieldType
         arguments:
             - @fos_user.user_to_username_transformer
         tags:

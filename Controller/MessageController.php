@@ -12,10 +12,14 @@
 namespace FOS\MessageBundle\Controller;
 
 use FOS\Message\Api\Driver\DriverStatementInterface;
+use FOS\Message\Api\Event\ThreadEvent;
 use FOS\Message\Api\Model\ParticipantInterface;
-use FOS\MessageBundle\Api\Event\PageListEvent;
+use FOS\Message\Api\Model\ThreadInterface;
+use FOS\MessageBundle\Api\Event\MessageFormEvent;
+use FOS\MessageBundle\Api\Event\ThreadListEvent;
 use FOS\MessageBundle\Events;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -49,11 +53,7 @@ final class MessageController extends Controller
             $threads = $this->get('fos_message.provider')->getInboxThreads($participant);
         }
 
-        $threads = $this->dispatchPageListEvent($threads, Events::PAGE_INBOX);
-
-        if ($this->get('fos_message.bridges_manager')->isEnabled('knp_paginator')) {
-            $threads = $this->get('fos_message.knp_paginator.paginator')->paginate($threads, $request);
-        }
+        $threads = $this->dispatchThreadListEvent(Events::PAGE_INBOX, $threads, $request, $searchQuery);
 
         return $this->renderThemed('inbox.html.twig', [
             'searchQuery' => $searchQuery,
@@ -80,11 +80,7 @@ final class MessageController extends Controller
             $threads = $this->get('fos_message.provider')->getSentThreads($participant);
         }
 
-        $threads = $this->dispatchPageListEvent($threads, Events::PAGE_SENT);
-
-        if ($this->get('fos_message.bridges_manager')->isEnabled('knp_paginator')) {
-            $threads = $this->get('fos_message.knp_paginator.paginator')->paginate($threads, $request);
-        }
+        $threads = $this->dispatchThreadListEvent(Events::PAGE_SENT, $threads, $request, $searchQuery);
 
         return $this->renderThemed('sent.html.twig', [
             'searchQuery' => $searchQuery,
@@ -111,11 +107,7 @@ final class MessageController extends Controller
             $threads = $this->get('fos_message.provider')->getDeletedThreads($participant);
         }
 
-        $threads = $this->dispatchPageListEvent($threads, Events::PAGE_DELETED);
-
-        if ($this->get('fos_message.bridges_manager')->isEnabled('knp_paginator')) {
-            $threads = $this->get('fos_message.knp_paginator.paginator')->paginate($threads, $request);
-        }
+        $threads = $this->dispatchThreadListEvent(Events::PAGE_DELETED, $threads, $request, $searchQuery);
 
         return $this->renderThemed('deleted.html.twig', [
             'searchQuery' => $searchQuery,
@@ -141,6 +133,8 @@ final class MessageController extends Controller
                 'threadId' => $message->getThread()->getId()
             ]));
         }
+
+        $form = $this->dispatchMessageFormEvent(Events::FORM_NEW, $form);
 
         return $this->renderThemed('start_thread.html.twig', [
             'form' => $form->createView(),
@@ -179,6 +173,9 @@ final class MessageController extends Controller
                 'threadId' => $message->getThread()->getId()
             ]));
         }
+
+        $thread = $this->dispatchThreadEvent(Events::PAGE_THREAD, $thread);
+        $form = $this->dispatchMessageFormEvent(Events::FORM_REPLY, $form);
 
         return $this->renderThemed('thread.html.twig', [
             'form' => $form->createView(),
@@ -359,19 +356,52 @@ final class MessageController extends Controller
     }
 
     /**
-     * Dispatch a PageListEvent
+     * Dispatch a thread list event.
      *
-     * @param DriverStatementInterface $statement
      * @param string $eventName
+     * @param DriverStatementInterface $statement
+     * @param Request $request
+     * @param string $searchQuery
      *
-     * @return DriverStatementInterface
+     * @return array|DriverStatementInterface
      */
-    private function dispatchPageListEvent(DriverStatementInterface $statement, $eventName)
+    private function dispatchThreadListEvent($eventName, $statement, $request, $searchQuery)
     {
-        $event = new PageListEvent($statement);
-
+        $event = new ThreadListEvent($statement, $request, $searchQuery);
         $this->get('event_dispatcher')->dispatch($eventName, $event);
 
-        return $event->getStatement();
+        return $event->hasList() ? $event->getList() : $event->getStatement();
+    }
+
+    /**
+     * Dispatch a message form event.
+     *
+     * @param string $eventName
+     * @param FormInterface $form
+     *
+     * @return FormInterface
+     */
+    private function dispatchMessageFormEvent($eventName, FormInterface $form)
+    {
+        $event = new MessageFormEvent($form);
+        $this->get('event_dispatcher')->dispatch($eventName, $event);
+
+        return $event->getForm();
+    }
+
+    /**
+     * Dispatch a thread event.
+     *
+     * @param string $eventName
+     * @param ThreadInterface $thread
+     *
+     * @return FormInterface
+     */
+    private function dispatchThreadEvent($eventName, ThreadInterface $thread)
+    {
+        $event = new ThreadEvent($thread);
+        $this->get('event_dispatcher')->dispatch($eventName, $event);
+
+        return $event->getThread();
     }
 }

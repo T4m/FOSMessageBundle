@@ -1,9 +1,11 @@
 services:
 
     #
-    # Driver statements paginator
+    # Event listener
     #
     fos_message.knp_paginator.paginator:
-        class: FOS\MessageBundle\Bridge\KnpPaginator\Paginator\StatementPaginator
+        class: FOS\MessageBundle\Bridge\KnpPaginator\KnpPaginatorSubscriber
         arguments:
             - @knp_paginator
+        tags:
+            - { name: kernel.event_subscriber }

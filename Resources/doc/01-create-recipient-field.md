@@ -4,11 +4,11 @@
 Create the recipient field
 ==========================
 
-You current messaging system is not fully working, as you may experienced
-it by trying to access `http://app.com/app_dev.php/messages/new`.
+You current messaging system is not fully working, as you may notice
+by trying to access `http://app.com/app_dev.php/messages/new`.
 
-Indeed, you need either to use predefined or to implement a recipient field
-so FOSMessageBundle can transform a given user into a User entity.
+Indeed you need either to use a predefined recipient field type or to implement
+one in order to let FOSMessageBundle transform a form value into a User entity.
 
 Using the FOSUserBundle
 -----------------------
