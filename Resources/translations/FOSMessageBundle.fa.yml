@@ -1,3 +1,4 @@
+# Persian
 
 # Global strings
 layout:
@@ -9,9 +10,9 @@ layout:
 # Form field labels
 form:
     subject: موضوع
-    content: ''
-    recipient: ''
-    recipients: ''
+    content: Content # TODO translate
+    recipient: Recipient # TODO translate
+    recipients: Recipients # TODO translate
 
 # Actions buttons
 actions:
@@ -19,8 +20,8 @@ actions:
     reply: پاسخ
     delete: حذف
     undelete: 'از حذف درآوردن'
-    read: ''
-    unread: ''
+    read: 'Mark as read' # TODO translate
+    unread: 'Mark as unread' # TODO translate
 
 # Search
 search:

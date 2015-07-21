@@ -1,0 +1,18 @@
+# Swedish
+
+fos_message:
+    recipient:
+        blank: 'No recipient specified' # TODO translate
+    recipients:
+        blank: 'No recipients specified' # TODO translate
+    subject:
+        blank: 'Please enter a subject' # TODO translate
+        short: 'The subject is too short|The subject is too short' # TODO translate
+        long: 'The subject is too long|The subject is too long' # TODO translate
+    body:
+        blank: 'Please enter a body' # TODO translate
+        short: 'The body is too short' # TODO translate
+        spam: 'Sorry, your message looks like spam' # TODO translate
+    not_authorized: 'You are not allowed to send this message' # TODO translate
+    reply_not_authorized: 'You are not allowed to reply to this message' # TODO translate
+    self_recipient: 'You cannot send a message to yourself' # TODO translate

@@ -1,3 +1,4 @@
+# German
 
 # Global strings
 layout:
@@ -9,18 +10,18 @@ layout:
 # Form field labels
 form:
     subject: Betreff
-    content: ''
-    recipient: ''
-    recipients: ''
+    content: Content # TODO translate
+    recipient: Recipient # TODO translate
+    recipients: Recipients # TODO translate
 
 # Actions buttons
 actions:
     new: 'Neue Nachricht senden'
     reply: Antworten
     delete: löschen
-    undelete: ''
-    read: ''
-    unread: ''
+    undelete: Undelete # TODO translate
+    read: 'Mark as read' # TODO translate
+    unread: 'Mark as unread' # TODO translate
 
 # Search
 search:

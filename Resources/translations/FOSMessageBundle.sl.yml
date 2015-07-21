@@ -1,3 +1,4 @@
+# Slovene
 
 # Global strings
 layout:
@@ -9,9 +10,9 @@ layout:
 # Form field labels
 form:
     subject: Zadeva
-    content: ''
-    recipient: ''
-    recipients: ''
+    content: Content # TODO translate
+    recipient: Recipient # TODO translate
+    recipients: Recipients # TODO translate
 
 # Actions buttons
 actions:
@@ -19,8 +20,8 @@ actions:
     reply: Odgovori
     delete: Izbriši
     undelete: Odbriši
-    read: ''
-    unread: ''
+    read: 'Mark as read' # TODO translate
+    unread: 'Mark as unread' # TODO translate
 
 # Search
 search:

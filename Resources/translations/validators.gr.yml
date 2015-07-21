@@ -1,3 +1,5 @@
+# Greek
+
 fos_message:
     recipient:
         blank: 'Δε δόθηκε παραλήπτης'

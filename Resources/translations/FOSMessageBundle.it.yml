@@ -1,3 +1,4 @@
+# Italian
 
 # Global strings
 layout:
@@ -9,18 +10,18 @@ layout:
 # Form field labels
 form:
     subject: Oggetto
-    content: ''
-    recipient: ''
-    recipients: ''
+    content: Content # TODO translate
+    recipient: Recipient # TODO translate
+    recipients: Recipients # TODO translate
 
 # Actions buttons
 actions:
     new: 'Scrivere un nuovo messaggio'
     reply: Rispondere
-    delete: ''
-    undelete: ''
-    read: ''
-    unread: ''
+    delete: Delete # TODO translate
+    undelete: Undelete # TODO translate
+    read: 'Mark as read' # TODO translate
+    unread: 'Mark as unread' # TODO translate
 
 # Search
 search:

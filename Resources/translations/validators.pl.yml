@@ -1,3 +1,5 @@
+# Polish
+
 fos_message:
     recipient:
         blank: 'Nie zdefiniowano odbiorcy'

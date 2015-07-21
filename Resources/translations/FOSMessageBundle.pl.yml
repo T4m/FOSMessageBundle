@@ -1,3 +1,4 @@
+# Polish
 
 # Global strings
 layout:
@@ -19,8 +20,8 @@ actions:
     reply: Odpowiedz
     delete: Usuń
     undelete: Przywróć
-    read: ''
-    unread: ''
+    read: 'Mark as read' # TODO translate
+    unread: 'Mark as unread' # TODO translate
 
 # Search
 search:

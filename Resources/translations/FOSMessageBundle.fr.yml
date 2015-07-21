@@ -1,3 +1,4 @@
+# French
 
 # Global strings
 layout:
@@ -19,8 +20,8 @@ actions:
     reply: Répondre
     delete: Supprimer
     undelete: Restaurer
-    read: ''
-    unread: ''
+    read: 'Marquer comme lu'
+    unread: 'Marquer comme non-lu'
 
 # Search
 search:

@@ -1,26 +1,27 @@
+# Swedish
 
 # Global strings
 layout:
     messenger: Meddelanden
     inbox: Inkorg
     sent: Skickat
-    deleted: ''
+    deleted: Deleted # TODO translate
 
 # Form field labels
 form:
     subject: Ämne
-    content: ''
-    recipient: ''
-    recipients: ''
+    content: Content # TODO translate
+    recipient: Recipient # TODO translate
+    recipients: Recipients # TODO translate
 
 # Actions buttons
 actions:
     new: 'Skriv nytt meddelande'
     reply: Svara
     delete: 'Ta bort'
-    undelete: ''
-    read: ''
-    unread: ''
+    undelete: Undelete # TODO translate
+    read: 'Mark as read' # TODO translate
+    unread: 'Mark as unread' # TODO translate
 
 # Search
 search:

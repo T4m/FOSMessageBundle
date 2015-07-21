@@ -1,3 +1,4 @@
+# Russian
 
 # Global strings
 layout:
@@ -19,8 +20,8 @@ actions:
     reply: Ответить
     delete: Удалить
     undelete: Восстановить
-    read: ''
-    unread: ''
+    read: 'Mark as read' # TODO translate
+    unread: 'Mark as unread' # TODO translate
 
 # Search
 search:

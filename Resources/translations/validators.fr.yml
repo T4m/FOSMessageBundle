@@ -1,3 +1,5 @@
+# French
+
 fos_message:
     recipient:
         blank: 'Pas de destinataire spécifié'

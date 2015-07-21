@@ -1,3 +1,4 @@
+# Spanish
 
 # Global strings
 layout:
@@ -19,8 +20,8 @@ actions:
     reply: Responder
     delete: Eliminar
     undelete: Restaurar
-    read: ''
-    unread: ''
+    read: 'Mark as read' # TODO translate
+    unread: 'Mark as unread' # TODO translate
 
 # Search
 search:
