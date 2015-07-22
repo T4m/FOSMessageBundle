@@ -2,17 +2,17 @@
 
 fos_message:
     recipient:
-        blank: 'No recipient specified'
+        blank: 指定されません受信者
     recipients:
-        blank: 'No recipients specified'
+        blank: 指定されません受信者
     subject:
-        blank: 'Please enter a subject'
-        short: 'The subject is too short|The subject is too short'
-        long: 'The subject is too long|The subject is too long'
+        blank: 件名を入力してください
+        short: '件名は短すぎます|件名は短すぎます'
+        long:  '件名は長すぎます|件名は長すぎます'
     body:
-        blank: 'Please enter a body'
-        short: 'The body is too short'
-        spam: 'Sorry, your message looks like spam'
-    not_authorized: 'You are not allowed to send this message'
-    reply_not_authorized: 'You are not allowed to reply to this message'
-    self_recipient: 'You cannot send a message to yourself'
+        blank: テキストを入力してください  # (Body remplacé par Text)
+        short: テキストが短すぎます
+        spam: 申し訳ありませんが、あなたのメッセージがスパムのように見えます
+    not_authorized: このメッセージを送信することはできません
+    reply_not_authorized: このメッセージに返信することはできません
+    self_recipient: あなたは自分自身にメッセージを送信することはできません
