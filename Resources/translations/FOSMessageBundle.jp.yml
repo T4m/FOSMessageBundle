@@ -2,43 +2,43 @@
 
 # Global strings
 layout:
-    messenger: Messenger            # Katakana
-    inbox: Inbox                    # Boite de réception
-    sent: Sent                      # Messages envoyés
-    deleted: Deleted                # Messages supprimés / archivés
+    messenger:　メセンジャー
+    inbox: メールボックス
+    sent: 送信されたメッセージ
+    deleted: 削除されたメッセージ
 
 # Form field labels
 form:
-    subject: Subject                # Sujet de la conversation
-    content: Content                # Contenu du message
-    recipient: Recipient            # Destinaire (unique)
-    recipients: Recipients          # Destinaires (multiple)
+    subject: 議題 
+    content: 内容  
+    recipient: 受信者
+    recipients: 受信者
 
 # Actions buttons
 actions:                            # Boutons, liens
-    new: 'Send a new message'
-    reply: Reply
-    delete: Delete
-    undelete: Undelete
-    read: 'Mark as read'
-    unread: 'Mark as unread'
+    new: 新しいメッセージを送る
+    reply: 返信
+    delete: 削除します
+    undelete: 元に戻します
+    read: 既読として
+    unread: 未読として印をつけます
 
 # Search
 search:
-    placeholder: Search...
-    results_found: '%num% thread found | %num% threads found'       # Conversation(s) trouvée(s)
+    placeholder: サーチ...
+    results_found: '会話%num%が見つかりました | %num%会話が見つかりました'
 
 # Thread lists
 list:
-    subject: Subject
-    starter: Starter                # Personne qui a démarré la conversation
-    startdate: 'Start date'         # Date de démarrage de la conversation
-    messages: Messages              # Nombre de messages
-    last_message: 'Last message'
-    actions: Actions
-    message_info: 'By %sender%, on %date%'
-    is_new: New
-    goto_last: 'Go to last message'
-    'on': 'On %date%'
-    by: 'By %sender%'
-    no_thread: 'There is no thread to show'
+    subject: 議題
+    starter: スターター                # ( スターター starter ou  誰が会話を開始 Personne qui a démarré la conversation)
+    startdate: 開始日        # Date de démarrage de la conversation
+    messages: メッセージ              # Nombre de messages
+    last_message: 最後のメッセージ
+    actions: アクション
+    message_info: 「%sender%」により, %date%に    # (date => 2015年12月30日)
+    is_new: 新しい
+    goto_last: 最後のメッセージに移動
+    'on': %date%に
+    by: 「%sender%」により'
+    no_thread: 表示する全く会話はありません
