@@ -91,6 +91,7 @@ Here is the current state of translations:
 - French: complete ✔
 - Greek: complete ✔
 - Italian: incomplete ✘
+- Japanese: incomplete ✘
 - Dutch: incomplete ✘
 - Polish: incomplete ✘
 - Russian: incomplete ✘

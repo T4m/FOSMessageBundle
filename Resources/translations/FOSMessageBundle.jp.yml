@@ -1,0 +1,44 @@
+# Japanses
+
+# Global strings
+layout:
+    messenger: Messenger            # Katakana
+    inbox: Inbox                    # Boite de réception
+    sent: Sent                      # Messages envoyés
+    deleted: Deleted                # Messages supprimés / archivés
+
+# Form field labels
+form:
+    subject: Subject                # Sujet de la conversation
+    content: Content                # Contenu du message
+    recipient: Recipient            # Destinaire (unique)
+    recipients: Recipients          # Destinaires (multiple)
+
+# Actions buttons
+actions:                            # Boutons, liens
+    new: 'Send a new message'
+    reply: Reply
+    delete: Delete
+    undelete: Undelete
+    read: 'Mark as read'
+    unread: 'Mark as unread'
+
+# Search
+search:
+    placeholder: Search...
+    results_found: '%num% thread found | %num% threads found'       # Conversation(s) trouvée(s)
+
+# Thread lists
+list:
+    subject: Subject
+    starter: Starter                # Personne qui a démarré la conversation
+    startdate: 'Start date'         # Date de démarrage de la conversation
+    messages: Messages              # Nombre de messages
+    last_message: 'Last message'
+    actions: Actions
+    message_info: 'By %sender%, on %date%'
+    is_new: New
+    goto_last: 'Go to last message'
+    'on': 'On %date%'
+    by: 'By %sender%'
+    no_thread: 'There is no thread to show'
