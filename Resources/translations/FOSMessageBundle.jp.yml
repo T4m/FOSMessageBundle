@@ -9,7 +9,7 @@ layout:
 
 # Form field labels
 form:
-    subject: 議題 
+    subject: 件名を
     content: 内容  
     recipient: 受信者
     recipients: 受信者
@@ -30,7 +30,7 @@ search:
 
 # Thread lists
 list:
-    subject: 議題
+    subject: 件名を
     starter: スターター                # ( スターター starter ou  誰が会話を開始 Personne qui a démarré la conversation)
     startdate: 開始日        # Date de démarrage de la conversation
     messages: メッセージ              # Nombre de messages
